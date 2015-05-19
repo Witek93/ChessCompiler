@@ -3,7 +3,7 @@ package chesscompiler;
 import chesscompiler.controller.ChessController;
 import chesscompiler.model.ChessBoard;
 import chesscompiler.model.pieces.Pawn;
-import chesscompiler.model.pieces.Piece;    
+import chesscompiler.model.pieces.Piece;
 import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 
@@ -21,9 +21,8 @@ public class Main {
 
         board.addPiece("D5", new Pawn(Piece.Color.WHITE));
 
-        
         controller.updateView();
-        
+
         frame.highlightField(1, 1);
         frame.highlightField(1, 2);
 

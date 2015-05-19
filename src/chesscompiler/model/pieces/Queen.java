@@ -1,8 +1,12 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.Movements;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -36,6 +40,10 @@ public class Queen extends Piece {
 
     @Override
     public String[] getDefaultMoves(String coordiantes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> moves = new ArrayList<>();
+        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.BOTH_SLANTS)));
+        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.HORIZONTAL_AND_VERTICAL)));
+
+        return moves.toArray(new String[moves.size()]);
     }
 }

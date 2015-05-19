@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.Movements;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class Bishop extends Piece {
 
     @Override
     public String[] getDefaultMoves(String coordiantes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Movements.getValid(coordiantes, Movements.Type.BOTH_SLANTS);
     }
 
 }

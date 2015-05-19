@@ -1,7 +1,6 @@
 package chesscompiler.model;
 
 import chesscompiler.model.pieces.NoPiece;
-import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
 
