@@ -2,6 +2,8 @@ package chesscompiler;
 
 import chesscompiler.controller.ChessController;
 import chesscompiler.model.ChessBoard;
+import chesscompiler.model.pieces.Pawn;
+import chesscompiler.model.pieces.Piece;
 import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 
@@ -17,7 +19,7 @@ public class Main {
         ChessController controller = new ChessController(frame, board);
         controller.start();
 
-        board.move("D7", "D5");
+        board.addPiece("D5", new Pawn(Piece.Color.WHITE));
         controller.updateView();
 
     }

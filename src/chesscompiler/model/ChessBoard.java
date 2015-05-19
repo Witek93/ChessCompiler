@@ -1,6 +1,7 @@
 package chesscompiler.model;
 
 import chesscompiler.model.pieces.NoPiece;
+import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
 
@@ -15,6 +16,11 @@ public class ChessBoard {
                 this.fields[i][j] = new Field();
             }
         }
+    }
+
+    public String[] getValidMoves(String coordinates) {
+        //TODO
+        return null;
     }
 
     private void move(int fromRow, int fromColumn, int toRow, int toColumn) {
@@ -54,6 +60,13 @@ public class ChessBoard {
     public boolean addPiece(int row, int column, Piece piece) {
         getField(row, column).setPiece(piece);
         return true;
+    }
+
+    public void addPiece(String a1, Piece piece) {
+        int[] coordinates = getCoordinates(a1);
+        if(coordinates != null) {
+            addPiece(coordinates[0], coordinates[1], piece);
+        }
     }
 
     public int getRowsCount() {
