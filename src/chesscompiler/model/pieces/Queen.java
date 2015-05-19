@@ -1,4 +1,4 @@
-package chesscompiler.board.pieces;
+package chesscompiler.model.pieces;
 
 import java.awt.Image;
 import java.io.File;

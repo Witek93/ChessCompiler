@@ -1,7 +1,7 @@
-package chesscompiler.board;
+package chesscompiler.model;
 
-import chesscompiler.board.pieces.NoPiece;
-import chesscompiler.board.pieces.Piece;
+import chesscompiler.model.pieces.NoPiece;
+import chesscompiler.model.pieces.Piece;
 
 
 public class Field {

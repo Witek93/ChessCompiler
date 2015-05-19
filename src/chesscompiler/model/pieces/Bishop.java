@@ -1,4 +1,4 @@
-package chesscompiler.board.pieces;
+package chesscompiler.model.pieces;
 
 import java.awt.Image;
 import java.io.File;
@@ -7,15 +7,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class Knight extends Piece {
+public class Bishop extends Piece {
 
-    public Knight(Color color) {
+    public Bishop(Color color) {
         this.color = color;
+
         try {
             if (color.equals(Color.WHITE)) {
-                img = ImageIO.read(new File(".\\resource\\images\\Chess_nlt60.png"));
+                img = ImageIO.read(new File(".\\resource\\images\\Chess_blt60.png"));
             } else {
-                img = ImageIO.read(new File(".\\resource\\images\\Chess_ndt60.png"));
+                img = ImageIO.read(new File(".\\resource\\images\\Chess_bdt60.png"));
             }
         } catch (IOException ex) {
             Logger.getLogger(Bishop.class.getName()).log(Level.SEVERE, null, ex);
@@ -25,12 +26,12 @@ public class Knight extends Piece {
 
     @Override
     public String toString() {
-        return this.color + " knight";
+        return this.color + " bishop";
     }
 
     @Override
     public Image getImage() {
-        return img;
+        return this.img;
     }
 
 }

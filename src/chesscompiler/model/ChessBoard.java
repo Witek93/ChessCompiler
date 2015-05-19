@@ -1,6 +1,6 @@
-package chesscompiler.board;
+package chesscompiler.model;
 
-import chesscompiler.board.pieces.Piece;
+import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 

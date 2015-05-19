@@ -1,9 +1,9 @@
 package chesscompiler.scanner;
 
-import chesscompiler.board.ChessBoard;
-import chesscompiler.board.PiecesCreator;
-import chesscompiler.board.pieces.NoPiece;
-import chesscompiler.board.pieces.Piece;
+import chesscompiler.model.ChessBoard;
+import chesscompiler.model.PiecesCreator;
+import chesscompiler.model.pieces.NoPiece;
+import chesscompiler.model.pieces.Piece;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
