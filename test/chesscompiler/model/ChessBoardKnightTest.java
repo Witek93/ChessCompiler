@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
  *
  * @author Marlenka
  */
-public class ChessBoardTestKnight {
+public class ChessBoardKnightTest {
     
-    public ChessBoardTestKnight() {
+    public ChessBoardKnightTest() {
     }
 
     @Test

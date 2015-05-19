@@ -14,9 +14,9 @@ import org.junit.Test;
  *
  * @author Marlenka
  */
-public class ChessBoardTestKing {
+public class ChessBoardKingTest {
 
-    public ChessBoardTestKing() {
+    public ChessBoardKingTest() {
     }
     
     @Test
