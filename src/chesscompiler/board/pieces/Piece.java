@@ -1,11 +1,12 @@
 package chesscompiler.board.pieces;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 
 public abstract class Piece {
     Color color;
-    ImageIcon img;
+    Image img;
     
     public void setColor(Color color) {
         this.color = color;
@@ -15,7 +16,7 @@ public abstract class Piece {
         return color;
     }
     
-    public abstract ImageIcon getImage();
+    public abstract Image getImage();
     
     public enum Color {
         

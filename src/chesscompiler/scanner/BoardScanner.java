@@ -1,7 +1,6 @@
 package chesscompiler.scanner;
 
 import chesscompiler.board.ChessBoard;
-import chesscompiler.board.ChessCoordinates;
 import chesscompiler.board.PiecesCreator;
 import chesscompiler.board.pieces.NoPiece;
 import chesscompiler.board.pieces.Piece;
@@ -32,9 +31,8 @@ public class BoardScanner {
             
             PiecesCreator creator = new PiecesCreator();
             
-            int row = 0;
-            while(scanner.hasNextLine() && row < BOARD_SIZE) {
-                
+            int rowNo = 0;
+            while(scanner.hasNextLine() && rowNo < BOARD_SIZE) {
                 String[] tokens = scanner.nextLine().split(" ");
                 
                 if(tokens.length % BOARD_SIZE != 0) {
@@ -42,7 +40,7 @@ public class BoardScanner {
                     return;
                 }
                 
-                int col = 0;
+                int columnNo = 0;
                 for(int i = 0; i < tokens.length;) {
                     if(isColorToken(tokens[i])) {
                         String color = tokens[i];
@@ -52,19 +50,19 @@ public class BoardScanner {
                             i++;
                             
                             Piece piece = creator.create(name, color); 
-                            board.addPiece(new ChessCoordinates(col, row), piece);
-                            col++;
+                            board.addPiece(rowNo, columnNo, piece);
+                            columnNo++;
                         }
                     } else {
                         if(isPieceToken(tokens[i])) {
                             i++;
                             Piece piece = new NoPiece();
-                            board.addPiece(new ChessCoordinates(col, row), piece);
-                            col++;
+                            board.addPiece(rowNo, columnNo, piece);
+                            columnNo++;
                         }
                     }
                 }
-                row++;
+                rowNo++;
             }
             
             

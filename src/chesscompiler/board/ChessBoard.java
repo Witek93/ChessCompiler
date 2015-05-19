@@ -1,6 +1,8 @@
 package chesscompiler.board;
 
 import chesscompiler.board.pieces.Piece;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class ChessBoard {
     private final Field[][] fields;
@@ -14,14 +16,9 @@ public class ChessBoard {
         }
     }
 
-    public boolean addPiece(ChessCoordinates coordinates, Piece piece) {
-        Field field = getField(coordinates);
-        if(field.getPiece() != null) {
-            return false;
-        } else {
-            field.setPiece(piece);
-            return true;
-        }
+    public boolean addPiece(int row, int column, Piece piece) {
+        getField(row, column).setPiece(piece);
+        return true;
     }
     
     public int getRowsCount() {
@@ -32,12 +29,16 @@ public class ChessBoard {
         return fields[0].length;
     }
     
-    private Field getField(ChessCoordinates coordinates) {
-        return this.fields[coordinates.column][coordinates.row];
+    public Image getPieceImage(int row, int column) {
+        return getPiece(row, column).getImage();
     }
     
     private Field getField(int row, int column) {
         return fields[row][column];
+    }
+    
+    private Piece getPiece(int row, int column) {
+        return getField(row, column).getPiece();
     }
     
     public String fieldToString(int x, int y) {
