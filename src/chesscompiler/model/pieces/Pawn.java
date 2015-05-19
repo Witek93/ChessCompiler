@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class Pawn extends Piece {
 
@@ -33,5 +32,10 @@ public class Pawn extends Piece {
     @Override
     public Image getImage() {
         return img;
+    }
+
+    @Override
+    public String[] getDefaultMoves(String coordiantes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

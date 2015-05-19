@@ -1,7 +1,6 @@
 package chesscompiler.model.pieces;
 
 import java.awt.Image;
-import javax.swing.ImageIcon;
 
 
 public abstract class Piece {
@@ -15,6 +14,8 @@ public abstract class Piece {
     public Color getColor() {
         return color;
     }
+    
+    abstract public String[] getDefaultMoves(String coordiantes);
     
     public abstract Image getImage();
     

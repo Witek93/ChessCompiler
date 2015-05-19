@@ -16,4 +16,9 @@ public class NoPiece extends Piece {
     public Image getImage() {
         return img;
     }
+
+    @Override
+    public String[] getDefaultMoves(String coordiantes) {
+        return new String[0];
+    }
 }

@@ -34,4 +34,9 @@ public class Bishop extends Piece {
         return this.img;
     }
 
+    @Override
+    public String[] getDefaultMoves(String coordiantes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

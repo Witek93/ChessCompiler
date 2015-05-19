@@ -19,8 +19,9 @@ public class ChessBoard {
     }
 
     public String[] getValidMoves(String coordinates) {
-        //TODO
-        return new String[0];
+        int array[] = Coordinates.toIntArray(coordinates);
+        String[] moves = getField(array[0], array[1]).getPiece().getDefaultMoves(coordinates);
+        return moves;
     }
 
     private void move(int fromRow, int fromColumn, int toRow, int toColumn) {
@@ -31,30 +32,11 @@ public class ChessBoard {
     }
 
     public void move(String from, String to) {
-        int[] source = getCoordinates(from);
-        int[] destination = getCoordinates(to);
+        int[] source = Coordinates.toIntArray(from);
+        int[] destination = Coordinates.toIntArray(to);
         if (source != null && destination != null) {
             move(source[0], source[1], destination[0], destination[1]);
         }
-    }
-
-    private int[] getCoordinates(String s) {
-        if (s.length() == 2) {
-            s = s.toUpperCase();
-            char letter = s.charAt(0);
-            char number = s.charAt(1);
-            if (letter >= 'A' && letter <= 'H') {
-                if (number >= '1' && number <= '8') {
-                    int[] coordinates = new int[2];
-                    int _row = 8 - (number - '0'); //number
-                    int _column = letter - 'A'; //letter
-                    coordinates[0] = _row;
-                    coordinates[1] = _column;
-                    return coordinates;
-                }
-            }
-        }
-        return null;
     }
 
     public boolean addPiece(int row, int column, Piece piece) {
@@ -63,7 +45,7 @@ public class ChessBoard {
     }
 
     public void addPiece(String a1, Piece piece) {
-        int[] coordinates = getCoordinates(a1);
+        int[] coordinates = Coordinates.toIntArray(a1);
         if(coordinates != null) {
             addPiece(coordinates[0], coordinates[1], piece);
         }

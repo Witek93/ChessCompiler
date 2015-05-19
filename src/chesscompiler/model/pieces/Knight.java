@@ -33,4 +33,9 @@ public class Knight extends Piece {
         return img;
     }
 
+    @Override
+    public String[] getDefaultMoves(String coordiantes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
