@@ -1,8 +1,11 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.Coordinates;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -36,6 +39,24 @@ public class Pawn extends Piece {
 
     @Override
     public String[] getDefaultMoves(String coordiantes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> moves = new LinkedList<>();
+        String front;
+        if (this.color.equals(Color.WHITE)) {
+            front = Coordinates.up(coordiantes);
+            moves.add(front);
+            moves.add(Coordinates.up(front));
+        } else {
+            front = Coordinates.down(coordiantes);
+            moves.add(front);
+            moves.add(Coordinates.down(front));
+        }
+        moves.add(Coordinates.left(front));
+        moves.add(Coordinates.right(front));
+        
+        while (moves.contains(null)) {
+            moves.remove(null);
+        }
+
+        return moves.toArray(new String[moves.size()]);
     }
 }

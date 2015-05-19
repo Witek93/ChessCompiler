@@ -43,4 +43,51 @@ public class Coordinates {
         return false;
     }
 
+    public static String up(String coordinates) {
+        if (coordinates == null) {
+            return null;
+        }
+        int[] array = toIntArray(coordinates);
+        array[0]--;
+        if (isValid(array)) {
+            return fromArray(array);
+        }
+        return null;
+    }
+
+    public static String down(String coordinates) {
+        if (coordinates == null) {
+            return null;
+        }
+        int[] array = toIntArray(coordinates);
+        array[0]++;
+        if (isValid(array)) {
+            return fromArray(array);
+        }
+        return null;
+    }
+
+    public static String left(String coordinates) {
+        if (coordinates == null) {
+            return null;
+        }
+        int[] array = toIntArray(coordinates);
+        array[1]--;
+        if (isValid(array)) {
+            return fromArray(array);
+        }
+        return null;
+    }
+
+    public static String right(String coordinates) {
+        if (coordinates == null) {
+            return null;
+        }
+        int[] array = toIntArray(coordinates);
+        array[1]++;
+        if (isValid(array)) {
+            return fromArray(array);
+        }
+        return null;
+    }
 }
