@@ -28,11 +28,10 @@ public class BoardPanel extends JPanel {
     private void initFields() {
         for (int i = 0; i < getRowsCount(); i++) {
             for (int j = 0; j < getColumnsCount(); j++) {
-                fields[i][j] = new Field();
                 if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
-                    fields[i][j].setBackground(new Color(80, 48, 45));
+                    fields[i][j] = new Field(new Color(80, 48, 45));
                 } else {
-                    fields[i][j].setBackground(new Color(237, 203, 118));
+                    fields[i][j] = new Field(new Color(237, 203, 118));
                 }
                 add(fields[i][j]);
             }
@@ -54,7 +53,7 @@ public class BoardPanel extends JPanel {
     public void updateField(int row, int column, Image image) {
         getField(row, column).setImage(image);
     }
-    
+
     public void setMouseListener(int row, int column, MouseListener listener) {
         getField(row, column).addMouseListener(listener);
     }
@@ -63,17 +62,24 @@ public class BoardPanel extends JPanel {
         return this.fields[row][column];
     }
 
+    public void resetHighlight() {
+        for (Field[] row : fields) {
+            for (Field field : row) {
+                field.reset();
+            }
+        }
+    }
+
     private class Field extends JPanel {
 
         private Image image;
+        private final Color backgroundColor;
 
-        public Field() {
+        public Field(Color backgroundColor) {
             this.image = null;
+            this.backgroundColor = backgroundColor;
+            setBackground(backgroundColor);
         }
-//
-//        public void setMouseListener(MouseListener listener) {
-//            this.addMouseListener(listener);
-//        }
 
         @Override
         public void paint(Graphics g) {
@@ -85,8 +91,12 @@ public class BoardPanel extends JPanel {
             this.image = image;
         }
 
+        private void reset() {
+            setBackground(backgroundColor);
+        }
+
         public void highlight() {
-            setBackground(new Color(80, 179, 45, 160));
+            setBackground(new Color(80, 179, 45));
         }
 
     }

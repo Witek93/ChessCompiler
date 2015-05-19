@@ -17,9 +17,16 @@ public class ChessBoard {
         }
     }
 
+    public String[] getValidMoves(int[] array) {
+        Field field = getField(array[0], array[1]);
+        String[] moves = field.getPiece().getDefaultMoves(Coordinates.fromArray(array));
+        return moves;
+    }
+
     public String[] getValidMoves(String coordinates) {
         int array[] = Coordinates.toIntArray(coordinates);
-        String[] moves = getField(array[0], array[1]).getPiece().getDefaultMoves(coordinates);
+        Field field = getField(array[0], array[1]);
+        String[] moves = field.getPiece().getDefaultMoves(coordinates);
         return moves;
     }
 
@@ -45,7 +52,7 @@ public class ChessBoard {
 
     public void addPiece(String a1, Piece piece) {
         int[] coordinates = Coordinates.toIntArray(a1);
-        if(coordinates != null) {
+        if (coordinates != null) {
             addPiece(coordinates[0], coordinates[1], piece);
         }
     }

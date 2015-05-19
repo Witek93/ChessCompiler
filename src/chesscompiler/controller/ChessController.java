@@ -4,6 +4,7 @@ import chesscompiler.model.ChessBoard;
 import chesscompiler.view.ChessFrame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class ChessController {
 
@@ -33,7 +34,12 @@ public class ChessController {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(row + ", " + column);
+                int coordinates[] = {row, column}; 
+                System.out.println(Arrays.toString(model.getValidMoves(coordinates)));
+                view.resetHighlight();
+                for(String fieldCoordinates: model.getValidMoves(coordinates)) {
+                    view.highlightField(fieldCoordinates);
+                }
             }
 
         });

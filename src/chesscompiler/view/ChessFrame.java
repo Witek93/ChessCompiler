@@ -1,8 +1,8 @@
 package chesscompiler.view;
 
+import chesscompiler.model.Coordinates;
 import java.awt.Image;
 import java.awt.event.MouseListener;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -26,8 +26,13 @@ public class ChessFrame extends JFrame {
         board.updateField(row, column, image);
     }
     
-    public void highlightField(int row, int column) {
-        board.highlightField(row, column);
+    public void highlightField(String coordinates) {
+        int[] array = Coordinates.toIntArray(coordinates);
+        board.highlightField(array[0], array[1]);
+    }
+    
+    public void resetHighlight() {
+        board.resetHighlight();
     }
     
     public void setMouseListener(int row, int column, MouseListener listener) {

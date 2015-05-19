@@ -23,9 +23,6 @@ public class Main {
 
         controller.updateView();
 
-        frame.highlightField(1, 1);
-        frame.highlightField(1, 2);
-
     }
 
 }
