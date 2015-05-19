@@ -21,6 +21,9 @@ public class Main {
 
         board.addPiece("D5", new Pawn(Piece.Color.WHITE));
         controller.updateView();
+        
+        frame.highlightField(1, 1);
+        frame.highlightField(1, 2);
 
     }
 
