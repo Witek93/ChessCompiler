@@ -44,6 +44,10 @@ public class BoardPanel extends JPanel {
         return fields[0].length;
     }
 
+    public void highlightField(int row, int column){
+        getField(row, column).highlight();
+    }
+    
     public void updateField(int row, int column, Image image) {
         getField(row, column).setImage(image);
     }
@@ -68,6 +72,10 @@ public class BoardPanel extends JPanel {
 
         public void setImage(Image image) {
             this.image = image;
+        }
+        
+        public void highlight(){
+            setBackground(new Color(80,179,45,160));
         }
 
     }
