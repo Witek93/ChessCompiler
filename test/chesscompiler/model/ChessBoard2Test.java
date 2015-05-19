@@ -35,4 +35,18 @@ public class ChessBoard2Test {
         assertArrayEquals(expResult, result);
     }
     
+    @Test//ruch z biciem
+    public void testGetValidMoves_WhitePawn_OneEnemy() {
+        ChessBoard board = new ChessBoard(8, 8);
+        board.addPiece("A4", new Rook(Rook.Color.BLACK));
+        board.addPiece("A5", new Rook(Rook.Color.WHITE));
+        
+        String[] result = board.getValidMoves("A4");
+        
+        String[] expResult = {"A1", "A5","A2","A3","B4","C4","D4","E4","F4","G4","H4"};
+        assertArrayEquals(expResult, result);
+    }
+    
+    
+    
 }
