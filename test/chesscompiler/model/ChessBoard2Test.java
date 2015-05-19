@@ -14,7 +14,7 @@ public class ChessBoard2Test {
     }
 
     @Test//pierwszy ruch bez wrogow
-    public void testGetValidMoves_BlackPawn_AloneFirstMove() {
+    public void testGetValidMoves_BlackRook_AloneFirstMove() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("A8", new Rook(Rook.Color.BLACK));
 
@@ -25,7 +25,7 @@ public class ChessBoard2Test {
     }
     
     @Test//pierwszy ruch bez wrogow
-    public void testGetValidMoves_WhitePawn_AloneFirstMove() {
+    public void testGetValidMoves_WhiteRook_AloneFirstMove() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("A1", new Rook(Rook.Color.BLACK));
 
@@ -36,10 +36,10 @@ public class ChessBoard2Test {
     }
     
     @Test//ruch z biciem
-    public void testGetValidMoves_WhitePawn_OneEnemy() {
+    public void testGetValidMoves_WhiteRook_OneEnemy() {
         ChessBoard board = new ChessBoard(8, 8);
-        board.addPiece("A4", new Rook(Rook.Color.BLACK));
-        board.addPiece("A5", new Rook(Rook.Color.WHITE));
+        board.addPiece("A4", new Rook(Rook.Color.WHITE));
+        board.addPiece("A5", new Rook(Rook.Color.BLACK));
         
         String[] result = board.getValidMoves("A4");
         
