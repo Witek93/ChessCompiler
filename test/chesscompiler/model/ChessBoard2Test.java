@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  */
 public class ChessBoard2Test {
     //ROOK TESTS
+    //todo roszada
     public ChessBoard2Test() {
     }
 
@@ -47,6 +48,39 @@ public class ChessBoard2Test {
         assertArrayEquals(expResult, result);
     }
     
+    @Test//ruch z biciem
+    public void testGetValidMoves_BlackRook_OneEnemy() {
+        ChessBoard board = new ChessBoard(8, 8);
+        board.addPiece("A5", new Rook(Rook.Color.BLACK));
+        board.addPiece("A4", new Rook(Rook.Color.WHITE));
+        
+        String[] result = board.getValidMoves("A5");
+        
+        String[] expResult = {"A6", "A7","A8","A4","B5","C5","D5","E5","F5","G5","H5"};
+        assertArrayEquals(expResult, result);
+    }
     
+    @Test//ruch bez bicia
+    public void testGetValidMoves_BlackRook_OneEnemy2() {
+        ChessBoard board = new ChessBoard(8, 8);
+        board.addPiece("A5", new Rook(Rook.Color.BLACK));
+        board.addPiece("B4", new Rook(Rook.Color.WHITE));
+        
+        String[] result = board.getValidMoves("A5");
+        
+        String[] expResult = {"A6", "A7","A8","A4","A3","A2","A1","B5","C5","D5","E5","F5","G5","H5"};
+        assertArrayEquals(expResult, result);
+    }
     
+    @Test//ruch bez bicia
+    public void testGetValidMoves_WhiteRook_OneEnemy2() {
+        ChessBoard board = new ChessBoard(8, 8);
+        board.addPiece("A5", new Rook(Rook.Color.WHITE));
+        board.addPiece("B4", new Rook(Rook.Color.BLACK));
+        
+        String[] result = board.getValidMoves("A5");
+        
+        String[] expResult = {"A6", "A7","A8","A4","A3","A2","A1","B5","C5","D5","E5","F5","G5","H5"};
+        assertArrayEquals(expResult, result);
+    }
 }
