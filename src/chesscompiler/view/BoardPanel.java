@@ -27,9 +27,9 @@ public class BoardPanel extends JPanel {
             for (int j = 0; j < getColumnsCount(); j++) {
                 fields[i][j] = new Field();
                 if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
-                    fields[i][j].setBackground(Color.darkGray);
+                    fields[i][j].setBackground(new Color(80, 48, 45));
                 } else {
-                    fields[i][j].setBackground(Color.white);
+                    fields[i][j].setBackground(new Color(237,203,118));
                 }
                 add(fields[i][j]);
             }
