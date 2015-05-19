@@ -20,7 +20,7 @@ public class ChessBoard {
 
     public String[] getValidMoves(String coordinates) {
         //TODO
-        return null;
+        return new String[0];
     }
 
     private void move(int fromRow, int fromColumn, int toRow, int toColumn) {
