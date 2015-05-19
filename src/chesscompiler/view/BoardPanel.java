@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -56,13 +54,10 @@ public class BoardPanel extends JPanel {
 
     private class Field extends JPanel {
 
-        private final JLabel label;
         private Image image;
 
         public Field() {
             this.image = null;
-            this.label = new JLabel();
-            add(label);
         }
 
         @Override
@@ -70,12 +65,9 @@ public class BoardPanel extends JPanel {
             super.paint(g);
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         }
-        
-        
 
         public void setImage(Image image) {
             this.image = image;
-//            label.setIcon(image);
         }
 
     }

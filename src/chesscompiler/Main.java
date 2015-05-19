@@ -17,6 +17,7 @@ public class Main {
         ChessController controller = new ChessController(frame, board);
         controller.start();
 
+        board.move("D7", "D5");
         controller.updateView();
 
     }
