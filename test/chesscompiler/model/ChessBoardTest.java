@@ -2,6 +2,7 @@ package chesscompiler.model;
 
 import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
+import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,6 +28,8 @@ public class ChessBoardTest {
         
         String[] expResult = {"A3", "A4"};
         // sprawdzamy czy się zgadza
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -38,6 +41,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("A7");
         
         String[] expResult = {"A6", "A5"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -51,6 +56,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("A2");
         
         String[] expResult = {"A3", "A4", "B3"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -63,6 +70,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("A3");
         
         String[] expResult = {"A4", "B4"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -75,6 +84,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("A7");
         
         String[] expResult = {"A6", "B6"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -87,6 +98,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("C7");
         
         String[] expResult = {};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -99,6 +112,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("B7");
         
         String[] expResult = {"C6","B6","B5"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -111,6 +126,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("B7");
         
         String[] expResult = {"C3","B3","B4"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -123,6 +140,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"D3"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
     
@@ -135,6 +154,8 @@ public class ChessBoardTest {
         String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"D5"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
 
