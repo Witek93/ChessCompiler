@@ -21,8 +21,6 @@ public class ChessFrame extends JFrame {
         add(this.board);
     }
 
-
-    
     public void updatePieceImage(int row, int column, Image image) {
         board.updateField(row, column, image);
     }

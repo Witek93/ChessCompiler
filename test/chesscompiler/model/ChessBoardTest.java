@@ -15,7 +15,7 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void testGetValidMoves_Pawn_AloneFirstMove() {
+    public void testGetValidMoves_WhitePawn_AloneFirstMove() {
         // definiujemy planszę
         ChessBoard board = new ChessBoard(8, 8);
         
@@ -31,7 +31,7 @@ public class ChessBoardTest {
     }
     
     @Test
-    public void testGetValidMoves_Pawn_FirstMoveOneEnemy() {
+    public void testGetValidMoves_WhitePawn_FirstMoveOneEnemy() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("A2", new Pawn(Piece.Color.WHITE));
         board.addPiece("B3", new Pawn(Piece.Color.BLACK));
@@ -43,7 +43,7 @@ public class ChessBoardTest {
     }
     
     @Test
-    public void testGetValidMoves_Pawn_OneEnemy() {
+    public void testGetValidMoves_WhitePawn_OneEnemy() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("A3", new Pawn(Piece.Color.WHITE));
         board.addPiece("B4", new Pawn(Piece.Color.BLACK));
