@@ -1,6 +1,7 @@
 package chesscompiler.view;
 
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -27,6 +28,10 @@ public class ChessFrame extends JFrame {
     
     public void highlightField(int row, int column) {
         board.highlightField(row, column);
+    }
+    
+    public void setMouseListener(int row, int column, MouseListener listener) {
+        board.setMouseListener(row, column, listener);
     }
 
 }

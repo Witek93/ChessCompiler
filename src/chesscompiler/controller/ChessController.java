@@ -2,6 +2,8 @@ package chesscompiler.controller;
 
 import chesscompiler.model.ChessBoard;
 import chesscompiler.view.ChessFrame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ChessController {
 
@@ -15,6 +17,26 @@ public class ChessController {
 
     public void start() {
         this.view.setVisible(true);
+        setListeners();
+    }
+
+    public void setListeners() {
+        for (int i = 0; i < model.getRowsCount(); i++) {
+            for (int j = 0; j < model.getColumnsCount(); j++) {
+                setListener(i, j);
+            }
+        }
+    }
+
+    public void setListener(final int row, final int column) {
+        view.setMouseListener(row, column, new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println(row + ", " + column);
+            }
+
+        });
     }
 
     public void updateView() {

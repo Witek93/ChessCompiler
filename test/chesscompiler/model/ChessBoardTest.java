@@ -90,7 +90,7 @@ public class ChessBoardTest {
     }
     
     @Test//blokada ruchow
-    public void testGetValidMoves_BlackPawn_FirstMoveOneEnemy() {
+    public void testGetValidMoves_BlackPawn_OneEnemy3() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("C7", new Pawn(Piece.Color.BLACK));
         board.addPiece("C6", new Pawn(Piece.Color.WHITE));

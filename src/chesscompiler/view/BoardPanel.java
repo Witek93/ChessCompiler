@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 /**
@@ -29,7 +32,7 @@ public class BoardPanel extends JPanel {
                 if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
                     fields[i][j].setBackground(new Color(80, 48, 45));
                 } else {
-                    fields[i][j].setBackground(new Color(237,203,118));
+                    fields[i][j].setBackground(new Color(237, 203, 118));
                 }
                 add(fields[i][j]);
             }
@@ -44,12 +47,16 @@ public class BoardPanel extends JPanel {
         return fields[0].length;
     }
 
-    public void highlightField(int row, int column){
+    public void highlightField(int row, int column) {
         getField(row, column).highlight();
     }
-    
+
     public void updateField(int row, int column, Image image) {
         getField(row, column).setImage(image);
+    }
+    
+    public void setMouseListener(int row, int column, MouseListener listener) {
+        getField(row, column).addMouseListener(listener);
     }
 
     private Field getField(int row, int column) {
@@ -63,6 +70,10 @@ public class BoardPanel extends JPanel {
         public Field() {
             this.image = null;
         }
+//
+//        public void setMouseListener(MouseListener listener) {
+//            this.addMouseListener(listener);
+//        }
 
         @Override
         public void paint(Graphics g) {
@@ -73,9 +84,9 @@ public class BoardPanel extends JPanel {
         public void setImage(Image image) {
             this.image = image;
         }
-        
-        public void highlight(){
-            setBackground(new Color(80,179,45,160));
+
+        public void highlight() {
+            setBackground(new Color(80, 179, 45, 160));
         }
 
     }
