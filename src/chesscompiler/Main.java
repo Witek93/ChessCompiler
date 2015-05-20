@@ -6,6 +6,7 @@ import chesscompiler.model.pieces.Bishop;
 import chesscompiler.model.pieces.Knight;
 import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
+import chesscompiler.model.pieces.Rook;
 import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 
@@ -21,8 +22,8 @@ public class Main {
         ChessController controller = new ChessController(frame, board);
         controller.start();
 
-        board.addPiece("D5", new Bishop(Piece.Color.WHITE));
-        board.addPiece("E5", new Bishop(Piece.Color.BLACK));
+        board.addPiece("D5", new Rook(Piece.Color.WHITE));
+        board.addPiece("E5", new Rook(Piece.Color.BLACK));
 
         controller.updateView();
 

@@ -10,14 +10,14 @@ public class Movements {
         List<String> result;
         switch (type) {
             case HORIZONTAL_AND_VERTICAL:
-                result = getHorizontal(cordsArray);
-                result.addAll(getVertical(cordsArray));
+                result = getHorizontal(cordsArray, board);
+                result.addAll(getVertical(cordsArray, board));
                 return result.toArray(new String[result.size()]);
             case HORIZONTAL:
-                result = getHorizontal(cordsArray);
+                result = getHorizontal(cordsArray, board);
                 return result.toArray(new String[result.size()]);
             case VERTICAL:
-                result = getVertical(cordsArray);
+                result = getVertical(cordsArray, board);
                 return result.toArray(new String[result.size()]);
             case BOTH_SLANTS:
                 result = getLeftSlant(cordsArray, board);
@@ -35,22 +35,89 @@ public class Movements {
 
     }
 
-    private static List<String> getHorizontal(int[] coordinates) {
+    private static List<String> getHorizontal(int[] coordinates, ChessBoard board) {
         List<String> moves = new LinkedList<>();
-        for (int i = 0; i < 8; i++) {
-            if (coordinates[1] != i) {
-                moves.add(Coordinates.fromArray(new int[]{coordinates[0], i}));
+        moves.addAll(getLefts(coordinates.clone(), board));
+        moves.addAll(getRights(coordinates.clone(), board));
+        System.out.println(moves);
+        return moves;
+    }
+
+    private static List<String> getLefts(int[] original, ChessBoard board) {
+        List<String> moves = new LinkedList<>();
+        int[] destination = original.clone();
+        destination[1]++;
+        while (Coordinates.isValid(destination)) {
+            if (board.isOccupied(Coordinates.fromArray(destination))) {
+                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(destination));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(destination));
             }
+            destination[1]++;
         }
         return moves;
     }
 
-    private static List<String> getVertical(int[] coordinates) {
+    private static List<String> getRights(int[] original, ChessBoard board) {
         List<String> moves = new LinkedList<>();
-        for (int i = 0; i < 8; i++) {
-            if (coordinates[0] != i) {
-                moves.add(Coordinates.fromArray(new int[]{i, coordinates[1]}));
+        int[] destination = original.clone();
+        destination[1]--;
+        while (Coordinates.isValid(destination)) {
+            if (board.isOccupied(Coordinates.fromArray(destination))) {
+                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(destination));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(destination));
             }
+            destination[1]--;
+        }
+        return moves;
+    }
+
+    private static List<String> getVertical(int[] coordinates, ChessBoard board) {
+        List<String> moves = new LinkedList<>();
+        moves.addAll(getUps(coordinates.clone(), board));
+        moves.addAll(getDowns(coordinates.clone(), board));
+        return moves;
+    }
+
+    private static List<String> getUps(int[] original, ChessBoard board) {
+        List<String> moves = new LinkedList<>();
+        int[] destination = original.clone();
+        destination[0]--;
+        while (Coordinates.isValid(destination)) {
+            if (board.isOccupied(Coordinates.fromArray(destination))) {
+                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(destination));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(destination));
+            }
+            destination[0]--;
+        }
+        return moves;
+    }
+
+    private static List<String> getDowns(int[] original, ChessBoard board) {
+        List<String> moves = new LinkedList<>();
+        int[] destination = original.clone();
+        destination[0]++;
+        while (Coordinates.isValid(destination)) {
+            if (board.isOccupied(Coordinates.fromArray(destination))) {
+                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(destination));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(destination));
+            }
+            destination[0]++;
         }
         return moves;
     }
