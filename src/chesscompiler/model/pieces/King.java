@@ -54,6 +54,15 @@ public class King extends Piece {
             moves.remove(null);
         }
 
+        int i = 0;
+        while (i < moves.size()) {
+            if (board.areAllies(coordiantes, moves.get(i))) {
+                moves.remove(i);
+            } else {
+                i++;
+            }
+        }
+
         return moves.toArray(new String[moves.size()]);
     }
 }
