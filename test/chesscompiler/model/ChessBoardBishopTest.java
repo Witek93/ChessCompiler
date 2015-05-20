@@ -135,7 +135,7 @@ public class ChessBoardBishopTest {
         
         String[] result = board.getValidMoves("E4");
         
-        String[] expResult = {"B1","C2","D3","F5","A8","B7","C6","D5","F3","G2","H1"};
+        String[] expResult = {"B1","C2","D3","F5","G6","H7","A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
@@ -149,7 +149,7 @@ public class ChessBoardBishopTest {
         
         String[] result = board.getValidMoves("E4");
         
-        String[] expResult = {"B1","C2","D3","F5","A8","B7","C6","D5","F3","G2","H1"};
+        String[] expResult = {"B1","C2","D3","F5","G6","H7","A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
