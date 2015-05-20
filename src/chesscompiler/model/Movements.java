@@ -39,7 +39,6 @@ public class Movements {
         List<String> moves = new LinkedList<>();
         moves.addAll(getLefts(coordinates.clone(), board));
         moves.addAll(getRights(coordinates.clone(), board));
-        System.out.println(moves);
         return moves;
     }
 
