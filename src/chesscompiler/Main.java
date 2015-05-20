@@ -21,6 +21,9 @@ public class Main {
         controller.start();
 
         board.addPiece("D5", new Knight(Piece.Color.WHITE));
+        board.addPiece("D4", new Pawn(Piece.Color.WHITE));
+        board.addPiece("E3", new Pawn(Piece.Color.WHITE));
+        board.addPiece("B6", new Pawn(Piece.Color.WHITE));
 
         controller.updateView();
 

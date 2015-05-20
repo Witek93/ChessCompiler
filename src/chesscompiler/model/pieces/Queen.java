@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Movements;
 import java.awt.Image;
 import java.io.File;
@@ -39,7 +40,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public String[] getDefaultMoves(String coordiantes) {
+    public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
         List<String> moves = new ArrayList<>();
         moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.BOTH_SLANTS)));
         moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.HORIZONTAL_AND_VERTICAL)));

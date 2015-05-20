@@ -19,14 +19,14 @@ public class ChessBoard {
 
     public String[] getValidMoves(int[] array) {
         Field field = getField(array[0], array[1]);
-        String[] moves = field.getPiece().getDefaultMoves(Coordinates.fromArray(array));
+        String[] moves = field.getPiece().getDefaultMoves(Coordinates.fromArray(array), this);
         return moves;
     }
 
     public String[] getValidMoves(String coordinates) {
         int array[] = Coordinates.toIntArray(coordinates);
         Field field = getField(array[0], array[1]);
-        String[] moves = field.getPiece().getDefaultMoves(coordinates);
+        String[] moves = field.getPiece().getDefaultMoves(coordinates, this);
         return moves;
     }
 
@@ -55,6 +55,40 @@ public class ChessBoard {
         if (coordinates != null) {
             addPiece(coordinates[0], coordinates[1], piece);
         }
+    }
+
+    public boolean areAllies(String piece_str, String other_str) {
+        int[] piece_array = Coordinates.toIntArray(piece_str);
+        Piece piece = getPiece(piece_array[0], piece_array[1]);
+        int[] other_array = Coordinates.toIntArray(other_str);
+        Piece other = getPiece(other_array[0], other_array[1]);
+        return piece.getColor().equals(other.getColor());
+    }
+
+    public boolean areEnemies(String piece, String other) {
+        return isOccupied(piece) && isOccupied(other) && !areAllies(piece, other);
+    }
+
+    public boolean isAtInitialFile(String coordiantes) {
+        if (isOccupied(coordiantes)) {
+            int[] array = Coordinates.toIntArray(coordiantes);
+            Piece piece = getField(array[0], array[1]).getPiece();
+            if (piece.getColor().equals(Piece.Color.BLACK) && array[0] == 1) {
+                return true;
+            }
+            if (piece.getColor().equals(Piece.Color.WHITE) && array[0] == 6) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOccupied(String coordinates) {
+        int[] ar = Coordinates.toIntArray(coordinates);
+        if (getPiece(ar[0], ar[1]) instanceof NoPiece) {
+            return false;
+        }
+        return true;
     }
 
     public int getRowsCount() {

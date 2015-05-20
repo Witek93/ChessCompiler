@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Coordinates;
 import java.awt.Image;
 import java.io.File;
@@ -37,7 +38,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public String[] getDefaultMoves(String coordiantes) {
+    public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
         List<String> moves = new LinkedList<>();
         moves.add(Coordinates.up(Coordinates.up(Coordinates.left(coordiantes))));
         moves.add(Coordinates.up(Coordinates.up(Coordinates.right(coordiantes))));
@@ -50,6 +51,15 @@ public class Knight extends Piece {
 
         while (moves.contains(null)) {
             moves.remove(null);
+        }
+
+        int i = 0;
+        while (i < moves.size()) {
+            if (board.areAllies(coordiantes, moves.get(i))) {
+                moves.remove(i);
+            } else {
+                i++;
+            }
         }
 
         return moves.toArray(new String[moves.size()]);

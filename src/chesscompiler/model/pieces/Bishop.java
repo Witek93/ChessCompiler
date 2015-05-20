@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Movements;
 import java.awt.Image;
 import java.io.File;
@@ -36,7 +37,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public String[] getDefaultMoves(String coordiantes) {
+    public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
         return Movements.getValid(coordiantes, Movements.Type.BOTH_SLANTS);
     }
 

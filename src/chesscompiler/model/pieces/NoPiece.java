@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import java.awt.Image;
 
 public class NoPiece extends Piece {
@@ -18,7 +19,7 @@ public class NoPiece extends Piece {
     }
 
     @Override
-    public String[] getDefaultMoves(String coordiantes) {
+    public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
         return new String[0];
     }
 }

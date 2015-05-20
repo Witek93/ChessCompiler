@@ -19,7 +19,7 @@ public class Coordinates {
     }
 
     public static boolean isValid(String coordinates) {
-        if (coordinates.length() == 2) {
+        if (coordinates != null && coordinates.length() == 2) {
             coordinates = coordinates.toUpperCase();
             char letter = coordinates.charAt(0);
             char number = coordinates.charAt(1);

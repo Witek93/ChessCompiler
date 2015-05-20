@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import java.awt.Image;
 
 
@@ -15,7 +16,7 @@ public abstract class Piece {
         return color;
     }
     
-    abstract public String[] getDefaultMoves(String coordiantes);
+    abstract public String[] getDefaultMoves(String coordiantes, ChessBoard board);
     
     public abstract Image getImage();
     

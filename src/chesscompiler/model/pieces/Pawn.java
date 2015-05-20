@@ -1,5 +1,6 @@
 package chesscompiler.model.pieces;
 
+import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Coordinates;
 import java.awt.Image;
 import java.io.File;
@@ -28,35 +29,59 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public String toString() {
-        return this.color + " pawn";
-    }
-
-    @Override
     public Image getImage() {
         return img;
     }
 
     @Override
-    public String[] getDefaultMoves(String coordiantes) {
+    public String[] getDefaultMoves(String coordinates, ChessBoard board) {
         List<String> moves = new LinkedList<>();
         String front;
         if (this.color.equals(Color.WHITE)) {
-            front = Coordinates.up(coordiantes);
-            moves.add(front);
-            moves.add(Coordinates.up(front));
+            front = Coordinates.up(coordinates);
+            if (!board.isOccupied(front)) {
+                moves.add(front);
+                String frontfront = Coordinates.up(front);
+                if (board.isAtInitialFile(coordinates) && canMoveTwice(board, frontfront)) {
+                    moves.add(frontfront);
+                }
+            }
         } else {
-            front = Coordinates.down(coordiantes);
-            moves.add(front);
-            moves.add(Coordinates.down(front));
+            front = Coordinates.down(coordinates);
+            if (!board.isOccupied(front)) {
+                moves.add(front);
+                String frontfront = Coordinates.down(front);
+                if (board.isAtInitialFile(coordinates) && canMoveTwice(board, frontfront)) {
+                    moves.add(frontfront);
+                }
+            }
         }
-        moves.add(Coordinates.left(front));
-        moves.add(Coordinates.right(front));
-        
-        while (moves.contains(null)) {
+
+        String left = Coordinates.left(front);
+        if (Coordinates.isValid(left) && board.areEnemies(coordinates, left)) {
+            moves.add(left);
+        }
+
+        String right = Coordinates.right(front);
+        if (Coordinates.isValid(right) && board.areEnemies(coordinates, right)) {
+            moves.add(right);
+        }
+
+        while (moves.contains(
+                null)) {
             moves.remove(null);
         }
 
-        return moves.toArray(new String[moves.size()]);
+        return moves.toArray(
+                new String[moves.size()]);
+    }
+
+    private boolean canMoveTwice(ChessBoard board, String frontfront) {
+        return !board.isOccupied(frontfront);
+    }
+
+    @Override
+    public String toString() {
+        return this.color + " pawn";
     }
 }

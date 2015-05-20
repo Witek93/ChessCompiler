@@ -83,7 +83,7 @@ public class ChessBoardTest {
         
         String[] result = board.getValidMoves("A7");
         
-        String[] expResult = {"A6", "B6"};
+        String[] expResult = {"A6", "A5", "B6"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
@@ -123,7 +123,7 @@ public class ChessBoardTest {
         board.addPiece("B2", new Pawn(Piece.Color.WHITE));
         board.addPiece("C3", new Pawn(Piece.Color.BLACK));
         
-        String[] result = board.getValidMoves("B7");
+        String[] result = board.getValidMoves("B2");
         
         String[] expResult = {"C3","B3","B4"};
         Arrays.sort(result);
