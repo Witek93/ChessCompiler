@@ -91,7 +91,7 @@ public class ChessBoardBishopTest {
         board.addPiece("D4", new Bishop(Bishop.Color.WHITE));
         board.addPiece("E5", new Bishop(Bishop.Color.BLACK));
         
-        String[] result = board.getValidMoves("E4");
+        String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"A1","B2","C3","E5","A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
@@ -105,7 +105,7 @@ public class ChessBoardBishopTest {
         board.addPiece("D4", new Bishop(Bishop.Color.BLACK));
         board.addPiece("E5", new Bishop(Bishop.Color.WHITE));
         
-        String[] result = board.getValidMoves("E4");
+        String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"A1","B2","C3","E5","A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
@@ -161,7 +161,7 @@ public class ChessBoardBishopTest {
         board.addPiece("D4", new Bishop(Bishop.Color.WHITE));
         board.addPiece("D5", new Bishop(Bishop.Color.BLACK));
         
-        String[] result = board.getValidMoves("E4");
+        String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"A1","B2","C3","E5","F6","G7","H8","A7","B6","C5","E3","F2","G1"};
         Arrays.sort(result);
@@ -175,7 +175,7 @@ public class ChessBoardBishopTest {
         board.addPiece("D4", new Bishop(Bishop.Color.BLACK));
         board.addPiece("D5", new Bishop(Bishop.Color.WHITE));
         
-        String[] result = board.getValidMoves("E4");
+        String[] result = board.getValidMoves("D4");
         
         String[] expResult = {"A1","B2","C3","E5","F6","G7","H8","A7","B6","C5","E3","F2","G1"};
         Arrays.sort(result);
