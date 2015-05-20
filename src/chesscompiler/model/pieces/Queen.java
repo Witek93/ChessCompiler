@@ -42,8 +42,8 @@ public class Queen extends Piece {
     @Override
     public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
         List<String> moves = new ArrayList<>();
-        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.BOTH_SLANTS)));
-        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, Movements.Type.HORIZONTAL_AND_VERTICAL)));
+        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, board, Movements.Type.BOTH_SLANTS)));
+        moves.addAll(Arrays.asList(Movements.getValid(coordiantes, board, Movements.Type.HORIZONTAL_AND_VERTICAL)));
 
         return moves.toArray(new String[moves.size()]);
     }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Movements {
 
-    public static String[] getValid(String coordinates, Type type) {
+    public static String[] getValid(String coordinates, ChessBoard board, Type type) {
         int[] cordsArray = Coordinates.toIntArray(coordinates);
         List<String> result;
         switch (type) {
@@ -20,14 +20,14 @@ public class Movements {
                 result = getVertical(cordsArray);
                 return result.toArray(new String[result.size()]);
             case BOTH_SLANTS:
-                result = getLeftSlant(cordsArray);
-                result.addAll(getRightSlant(cordsArray));
+                result = getLeftSlant(cordsArray, board);
+                result.addAll(getRightSlant(cordsArray, board));
                 return result.toArray(new String[result.size()]);
             case LEFT_SLANT:
-                result = getLeftSlant(cordsArray);
+                result = getLeftSlant(cordsArray, board);
                 return result.toArray(new String[result.size()]);
             case RIGHT_SLANT:
-                result = getRightSlant(cordsArray);
+                result = getRightSlant(cordsArray, board);
                 return result.toArray(new String[result.size()]);
             default:
                 return null;
@@ -55,55 +55,79 @@ public class Movements {
         return moves;
     }
 
-    private static List<String> getLeftSlant(int[] coordinates) {
+    private static List<String> getLeftSlant(int[] coordinates, ChessBoard board) {
         List<String> moves = new LinkedList<>();
-        moves.addAll(getUpperLeftSlant(coordinates.clone()));
-        moves.addAll(getLowerLeftSlant(coordinates.clone()));
+        moves.addAll(getUpperLeftSlant(coordinates.clone(), board));
+        moves.addAll(getLowerLeftSlant(coordinates.clone(), board));
         return moves;
     }
 
-    private static List<String> getUpperLeftSlant(int[] array) {
+    private static List<String> getUpperLeftSlant(int[] original, ChessBoard board) {
         List<String> moves = new LinkedList<>();
+        int[] array = original.clone();
         upperLeft(array);
         while (Coordinates.isValid(array)) {
-            moves.add(Coordinates.fromArray(array));
+            if (board.isOccupied(Coordinates.fromArray(array))) {
+                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(array));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(array));
+            }
             upperLeft(array);
         }
         return moves;
     }
 
     private static void upperLeft(int[] array) {
-        array[0]++;
-        array[1]--;
+        array[0]--;
+        array[1]++;
     }
 
-    private static List<String> getLowerLeftSlant(int[] array) {
+    private static List<String> getLowerLeftSlant(int[] original, ChessBoard board) {
         List<String> moves = new LinkedList<>();
+        int[] array = original.clone();
         lowLeft(array);
         while (Coordinates.isValid(array)) {
-            moves.add(Coordinates.fromArray(array));
+            if (board.isOccupied(Coordinates.fromArray(array))) {
+                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(array));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(array));
+            }
             lowLeft(array);
         }
         return moves;
     }
 
     private static void lowLeft(int[] array) {
-        array[0]--;
-        array[1]++;
+        array[0]++;
+        array[1]--;
     }
 
-    private static List<String> getRightSlant(int[] coordinates) {
+    private static List<String> getRightSlant(int[] coordinates, ChessBoard board) {
         List<String> moves = new LinkedList<>();
-        moves.addAll(getUpperRightSlant(coordinates.clone()));
-        moves.addAll(getLowerRightSlant(coordinates.clone()));
+        moves.addAll(getUpperRightSlant(coordinates.clone(), board));
+        moves.addAll(getLowerRightSlant(coordinates.clone(), board));
         return moves;
     }
 
-    private static List<String> getUpperRightSlant(int[] array) {
+    private static List<String> getUpperRightSlant(int[] original, ChessBoard board) {
         List<String> moves = new LinkedList<>();
+        int[] array = original.clone();
         upperRight(array);
         while (Coordinates.isValid(array)) {
-            moves.add(Coordinates.fromArray(array));
+            if (board.isOccupied(Coordinates.fromArray(array))) {
+                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(array));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(array));
+            }
             upperRight(array);
         }
         return moves;
@@ -114,11 +138,19 @@ public class Movements {
         array[1]++;
     }
 
-    private static List<String> getLowerRightSlant(int[] array) {
+    private static List<String> getLowerRightSlant(int[] original, ChessBoard board) {
         List<String> moves = new LinkedList<>();
+        int[] array = original.clone();
         lowerRight(array);
         while (Coordinates.isValid(array)) {
-            moves.add(Coordinates.fromArray(array));
+            if (board.isOccupied(Coordinates.fromArray(array))) {
+                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
+                    moves.add(Coordinates.fromArray(array));
+                }
+                break;
+            } else {
+                moves.add(Coordinates.fromArray(array));
+            }
             lowerRight(array);
         }
         return moves;

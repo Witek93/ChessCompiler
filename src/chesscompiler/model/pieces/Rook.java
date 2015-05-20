@@ -38,7 +38,7 @@ public class Rook extends Piece {
 
     @Override
     public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
-        String[] movesArray = Movements.getValid(coordiantes, Movements.Type.HORIZONTAL_AND_VERTICAL);
+        String[] movesArray = Movements.getValid(coordiantes, board, Movements.Type.HORIZONTAL_AND_VERTICAL);
         return movesArray;
     }
 

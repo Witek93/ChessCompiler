@@ -2,6 +2,7 @@ package chesscompiler;
 
 import chesscompiler.controller.ChessController;
 import chesscompiler.model.ChessBoard;
+import chesscompiler.model.pieces.Bishop;
 import chesscompiler.model.pieces.Knight;
 import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
@@ -20,10 +21,8 @@ public class Main {
         ChessController controller = new ChessController(frame, board);
         controller.start();
 
-        board.addPiece("D5", new Knight(Piece.Color.WHITE));
-        board.addPiece("D4", new Pawn(Piece.Color.WHITE));
-        board.addPiece("E3", new Pawn(Piece.Color.WHITE));
-        board.addPiece("B6", new Pawn(Piece.Color.WHITE));
+        board.addPiece("D5", new Bishop(Piece.Color.WHITE));
+        board.addPiece("E5", new Bishop(Piece.Color.BLACK));
 
         controller.updateView();
 
