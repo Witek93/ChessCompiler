@@ -19,8 +19,9 @@ public class ChessBoardKnightTest {
     //pierwszy ruch
     public void testGetValidMoves_WhiteKnight_AloneFirstMove() {
         ChessBoard board = new ChessBoard(8, 8);
-        board.addPiece("B2", new Knight(Piece.Color.WHITE));
-        String[] result = board.getValidMoves("B2");
+        board.addPiece("B1", new Knight(Piece.Color.WHITE));
+        board.addPiece("D2", new Pawn(Piece.Color.WHITE));
+        String[] result = board.getValidMoves("B1");
         String[] expResult = {"A3", "C3"};
         Arrays.sort(result);
         Arrays.sort(expResult);
@@ -32,6 +33,7 @@ public class ChessBoardKnightTest {
     public void testGetValidMoves_BlackKnight_AloneFirstMove() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("B8", new Knight(Piece.Color.BLACK));
+        board.addPiece("D7", new Pawn(Piece.Color.BLACK));
         String[] result = board.getValidMoves("B8");
         String[] expResult = {"A6", "C6"};
         Arrays.sort(result);
