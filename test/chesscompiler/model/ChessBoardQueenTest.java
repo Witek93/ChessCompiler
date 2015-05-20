@@ -118,7 +118,7 @@ public class ChessBoardQueenTest {
         
         
         String[] expResult = {"B1","C2","D3","F5","G6","H7", "A4", "B4","C4","D4","F4","G4","H4",
-                "E5","E6","E7","E8", "A8","B7","C6","D5","F3","G2","H1"};
+                "E5","E1","E2","E3", "A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
@@ -134,7 +134,7 @@ public class ChessBoardQueenTest {
         
         
         String[] expResult = {"B1","C2","D3","F5","G6","H7", "A4", "B4","C4","D4","F4","G4","H4",
-                "E5","E6","E7","E8", "A8","B7","C6","D5","F3","G2","H1"};
+                "E5","E1","E2","E3", "A8","B7","C6","D5","F3","G2","H1"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
