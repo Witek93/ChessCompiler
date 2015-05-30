@@ -40,7 +40,7 @@ public class ChessBoardKingTest {
         board.addPiece("C5", new Knight(Piece.Color.BLACK));
         board.addPiece("D3", new Bishop(Piece.Color.WHITE));
         String[] result = board.getValidMoves("D4");
-        String[] expResult = {"C3", "C4", "E3", "D5", "E5"};
+        String[] expResult = {"C3", "C4", "E3", "D5", "E5", "C5"};
         Arrays.sort(result);
         Arrays.sort(expResult);
         assertArrayEquals(expResult, result);

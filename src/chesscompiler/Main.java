@@ -26,7 +26,7 @@ public class Main {
         controller.start();
         board.addPiece("C3", new Bishop(Piece.Color.BLACK));
         board.addPiece("E5", new Rook(Piece.Color.WHITE));
-
+        board.addPiece("G5", new King(Piece.Color.BLACK));
 //        board.addPiece("C3", new King(Piece.Color.WHITE));
 //        board.addPiece("D3", new Pawn(Piece.Color.WHITE));
 //        board.addPiece("B1", new Rook(Piece.Color.BLACK));
