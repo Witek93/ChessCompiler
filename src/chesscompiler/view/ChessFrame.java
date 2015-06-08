@@ -2,7 +2,6 @@ package chesscompiler.view;
 
 import chesscompiler.model.Coordinates;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
@@ -35,6 +34,11 @@ public class ChessFrame extends JFrame {
     public void highlightField(String coordinates) {
         int[] array = Coordinates.toIntArray(coordinates);
         board.highlightField(array[0], array[1]);
+    }
+    
+    
+    public boolean isHighlighted(int row, int column) {
+        return board.isHighlighted(row, column);
     }
     
     public void resetHighlight() {

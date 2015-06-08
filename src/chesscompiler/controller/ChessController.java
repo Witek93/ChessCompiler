@@ -1,6 +1,7 @@
 package chesscompiler.controller;
 
 import chesscompiler.model.ChessBoard;
+import chesscompiler.model.Coordinates;
 import chesscompiler.view.ChessFrame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,6 +11,7 @@ public class ChessController {
 
     private final ChessFrame view;
     private final ChessBoard model;
+    private static int[] lastCoordinates = new int[2];
 
     public ChessController(ChessFrame view, ChessBoard model) {
         this.view = view;
@@ -35,15 +37,22 @@ public class ChessController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    int coordinates[] = {row, column};
-                    System.out.println(Arrays.toString(model.getValidMoves(coordinates)));
-                    view.resetHighlight();
-                    for (String fieldCoordinates : model.getValidMoves(coordinates)) {
-                        view.highlightField(fieldCoordinates);
+                    if (view.isHighlighted(row, column)) {
+                        model.move(Coordinates.fromArray(lastCoordinates), Coordinates.create(row, column));
+                        view.resetHighlight();
+                        updateView();
+                    } else {
+                        view.resetHighlight();
+                        lastCoordinates[0] = row;
+                        lastCoordinates[1] = column;
+                        System.out.println(Arrays.toString(model.getValidMoves(lastCoordinates)));
+                        for (String fieldCoordinates : model.getValidMoves(lastCoordinates)) {
+                            view.highlightField(fieldCoordinates);
+                        }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     view.showMenu(row, column, e);
-                    
+
                 }
             }
 

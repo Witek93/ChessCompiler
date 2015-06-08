@@ -12,8 +12,12 @@ public class Coordinates {
     }
 
     public static String fromArray(int[] coordinates) {
-        char letter = (char) (coordinates[1] + 'A');
-        char number = (char) (8 - coordinates[0] + '0');
+        return create(coordinates[0], coordinates[1]);
+    }
+    
+    public static String create(int row, int column) {
+        char letter = (char) (column + 'A');
+        char number = (char) (8 - row + '0');
         String str = "" + letter + number;
         return str;
     }
@@ -91,10 +95,4 @@ public class Coordinates {
         return null;
     }
 
-    public static String fromArray(int i, int j) {
-      char letter = (char) (j + 'A');
-        char number = (char) (8 - i + '0');
-        String str = "" + letter + number;
-        return str;
-    }
 }

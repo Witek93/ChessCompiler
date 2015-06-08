@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
@@ -17,6 +16,7 @@ public class BoardPanel extends JPanel {
 
     Field[][] fields;  
     ContextMenu contextMenu;
+    private static final Color HIGHLIGHT_COLOR = new Color(80, 179, 45);
        
     public BoardPanel(int rowsCount, int columnsCount) {
         fields = new Field[rowsCount][columnsCount];
@@ -55,6 +55,10 @@ public class BoardPanel extends JPanel {
 
     public void highlightField(int row, int column) {
         getField(row, column).highlight();
+    }
+    
+    public boolean isHighlighted(int row, int column) {
+        return getField(row, column).isHighlighed();
     }
 
     public void updateField(int row, int column, Image image) {
@@ -107,7 +111,11 @@ public class BoardPanel extends JPanel {
         }
 
         public void highlight() {
-            setBackground(new Color(80, 179, 45));
+            setBackground(HIGHLIGHT_COLOR);
+        }
+        
+        public boolean isHighlighed() {
+            return this.getBackground().equals(HIGHLIGHT_COLOR);
         }
         
         public void showMenu(MouseEvent e){

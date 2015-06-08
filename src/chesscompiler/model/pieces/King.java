@@ -79,12 +79,12 @@ public class King extends Piece {
             for(int j=0; j<board.getColumnsCount(); j++){
                 Piece piece = board.getPiece(i, j);
                 int coord[] = {i, j};
-                if (board.areEnemies(coordinates, Coordinates.fromArray(i,j)) && !piece.getClass().equals(King.class)){
+                if (board.areEnemies(coordinates, Coordinates.create(i,j)) && !piece.getClass().equals(King.class)){
                     String[] enemyMoves = board.getValidMoves(coord);
                     moves2.addAll(Arrays.asList(enemyMoves));
                 }
-                else if (board.areEnemies(coordinates, Coordinates.fromArray(i,j)) && piece.getClass().equals(King.class)){
-                    List<String> enemyKingMoves = getMoves(Coordinates.fromArray(i,j), board);
+                else if (board.areEnemies(coordinates, Coordinates.create(i,j)) && piece.getClass().equals(King.class)){
+                    List<String> enemyKingMoves = getMoves(Coordinates.create(i,j), board);
                     moves2.addAll(enemyKingMoves);
                 }
             }
