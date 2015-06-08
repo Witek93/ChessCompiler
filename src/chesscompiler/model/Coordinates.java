@@ -90,4 +90,11 @@ public class Coordinates {
         }
         return null;
     }
+
+    public static String fromArray(int i, int j) {
+      char letter = (char) (j + 'A');
+        char number = (char) (8 - i + '0');
+        String str = "" + letter + number;
+        return str;
+    }
 }

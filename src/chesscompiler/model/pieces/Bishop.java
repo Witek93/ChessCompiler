@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class Bishop extends Piece {
+public class Bishop extends Piece{
 
     public Bishop(Color color) {
         this.color = color;

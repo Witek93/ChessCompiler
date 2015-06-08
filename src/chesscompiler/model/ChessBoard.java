@@ -107,7 +107,7 @@ public class ChessBoard {
         return fields[row][column];
     }
 
-    private Piece getPiece(int row, int column) {
+    public Piece getPiece(int row, int column) {
         return getField(row, column).getPiece();
     }
 
