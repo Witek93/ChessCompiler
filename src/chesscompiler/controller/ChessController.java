@@ -34,11 +34,16 @@ public class ChessController {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                int coordinates[] = {row, column}; 
-                System.out.println(Arrays.toString(model.getValidMoves(coordinates)));
-                view.resetHighlight();
-                for(String fieldCoordinates: model.getValidMoves(coordinates)) {
-                    view.highlightField(fieldCoordinates);
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    int coordinates[] = {row, column};
+                    System.out.println(Arrays.toString(model.getValidMoves(coordinates)));
+                    view.resetHighlight();
+                    for (String fieldCoordinates : model.getValidMoves(coordinates)) {
+                        view.highlightField(fieldCoordinates);
+                    }
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
+                    view.showMenu(row, column, e);
+                    
                 }
             }
 

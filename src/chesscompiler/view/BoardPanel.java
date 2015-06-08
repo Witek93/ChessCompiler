@@ -15,14 +15,16 @@ import javax.swing.JPanel;
  */
 public class BoardPanel extends JPanel {
 
-    Field[][] fields;
-
+    Field[][] fields;  
+    ContextMenu contextMenu;
+       
     public BoardPanel(int rowsCount, int columnsCount) {
         fields = new Field[rowsCount][columnsCount];
 
         setLayout(new GridLayout(rowsCount, columnsCount, 1, 1));
 
-        initFields();
+        initFields();       
+        initContextMenu();
     }
 
     private void initFields() {
@@ -36,6 +38,11 @@ public class BoardPanel extends JPanel {
                 add(fields[i][j]);
             }
         }
+    }
+    
+        
+    public void initContextMenu(){
+        contextMenu = new ContextMenu();
     }
 
     public int getRowsCount() {
@@ -69,7 +76,11 @@ public class BoardPanel extends JPanel {
             }
         }
     }
-
+    
+    public void showMenu(int row, int column, MouseEvent e){
+        getField(row,column).showMenu(e);
+    }
+    
     private class Field extends JPanel {
 
         private Image image;
@@ -98,7 +109,10 @@ public class BoardPanel extends JPanel {
         public void highlight() {
             setBackground(new Color(80, 179, 45));
         }
-
+        
+        public void showMenu(MouseEvent e){
+            contextMenu.show(Field.this, e.getX(), e.getY());
+        }
     }
 
 }

@@ -2,6 +2,8 @@ package chesscompiler.view;
 
 import chesscompiler.model.Coordinates;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
@@ -12,7 +14,7 @@ import javax.swing.JFrame;
 public class ChessFrame extends JFrame {
 
     BoardPanel board;
-
+    
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
         setTitle("Chess game");
@@ -24,6 +26,10 @@ public class ChessFrame extends JFrame {
 
     public void updatePieceImage(int row, int column, Image image) {
         board.updateField(row, column, image);
+    }
+    
+    public void showMenu(int row, int column, MouseEvent e){
+        board.showMenu(row, column, e);
     }
     
     public void highlightField(String coordinates) {

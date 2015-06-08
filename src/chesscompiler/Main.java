@@ -2,14 +2,10 @@ package chesscompiler;
 
 import chesscompiler.controller.ChessController;
 import chesscompiler.model.ChessBoard;
-import chesscompiler.model.pieces.Bishop;
 import chesscompiler.model.pieces.King;
-import chesscompiler.model.pieces.Knight;
 import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
-import chesscompiler.model.pieces.Queen;
 import chesscompiler.model.pieces.Rook;
-import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 
 public class Main {

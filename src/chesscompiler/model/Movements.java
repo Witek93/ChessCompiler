@@ -47,17 +47,22 @@ public class Movements {
         int[] destination = original.clone();
         destination[1]++;
         while (Coordinates.isValid(destination)) {
-            if (board.isOccupied(Coordinates.fromArray(destination))) {
-                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(destination));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(destination));
-            }
+            if (getValue(board, destination, original, moves)) break;
             destination[1]++;
         }
         return moves;
+    }
+
+    private static boolean getValue(ChessBoard board, int[] destination, int[] original, List<String> moves) {
+        if (board.isOccupied(Coordinates.fromArray(destination))) {
+            if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
+                moves.add(Coordinates.fromArray(destination));
+            }
+            return true;
+        } else {
+            moves.add(Coordinates.fromArray(destination));
+        }
+        return false;
     }
 
     private static List<String> getRights(int[] original, ChessBoard board) {
@@ -65,14 +70,7 @@ public class Movements {
         int[] destination = original.clone();
         destination[1]--;
         while (Coordinates.isValid(destination)) {
-            if (board.isOccupied(Coordinates.fromArray(destination))) {
-                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(destination));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(destination));
-            }
+            if (getValue(board, destination, original, moves)) break;
             destination[1]--;
         }
         return moves;
@@ -90,14 +88,7 @@ public class Movements {
         int[] destination = original.clone();
         destination[0]--;
         while (Coordinates.isValid(destination)) {
-            if (board.isOccupied(Coordinates.fromArray(destination))) {
-                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(destination));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(destination));
-            }
+            if (getValue(board, destination, original, moves)) break;
             destination[0]--;
         }
         return moves;
@@ -108,14 +99,7 @@ public class Movements {
         int[] destination = original.clone();
         destination[0]++;
         while (Coordinates.isValid(destination)) {
-            if (board.isOccupied(Coordinates.fromArray(destination))) {
-                if (board.areEnemies(Coordinates.fromArray(destination), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(destination));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(destination));
-            }
+            if (getValue(board, destination, original, moves)) break;
             destination[0]++;
         }
         return moves;
@@ -133,14 +117,7 @@ public class Movements {
         int[] array = original.clone();
         upperLeft(array);
         while (Coordinates.isValid(array)) {
-            if (board.isOccupied(Coordinates.fromArray(array))) {
-                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(array));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(array));
-            }
+            if (getValue(board, array, original, moves)) break;
             upperLeft(array);
         }
         return moves;
@@ -156,14 +133,7 @@ public class Movements {
         int[] array = original.clone();
         lowLeft(array);
         while (Coordinates.isValid(array)) {
-            if (board.isOccupied(Coordinates.fromArray(array))) {
-                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(array));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(array));
-            }
+            if (getValue(board, array, original, moves)) break;
             lowLeft(array);
         }
         return moves;
@@ -186,14 +156,7 @@ public class Movements {
         int[] array = original.clone();
         upperRight(array);
         while (Coordinates.isValid(array)) {
-            if (board.isOccupied(Coordinates.fromArray(array))) {
-                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(array));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(array));
-            }
+            if (getValue(board, array, original, moves)) break;
             upperRight(array);
         }
         return moves;
@@ -209,16 +172,9 @@ public class Movements {
         int[] array = original.clone();
         lowerRight(array);
         while (Coordinates.isValid(array)) {
-            if (board.isOccupied(Coordinates.fromArray(array))) {
-                if (board.areEnemies(Coordinates.fromArray(array), Coordinates.fromArray(original))) {
-                    moves.add(Coordinates.fromArray(array));
-                }
-                break;
-            } else {
-                moves.add(Coordinates.fromArray(array));
-            }
-            lowerRight(array);
-        }
+        if (getValue(board, array, original, moves)) break;
+        lowerRight(array);
+    }
         return moves;
     }
 
