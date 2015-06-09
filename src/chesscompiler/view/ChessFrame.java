@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 /**
  *
@@ -18,10 +19,12 @@ public class ChessFrame extends JFrame {
 
     private BoardPanel board;
     private JMenuItem resetItem;
+    private JRadioButtonMenuItem gameModeItem;
 
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
         this.resetItem = new JMenuItem("Reset");
+        this.gameModeItem = new JRadioButtonMenuItem("Game Mode");
         
         setTitle("Chess game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,6 +44,11 @@ public class ChessFrame extends JFrame {
         setJMenuBar(menuBar);
         
         gameMenu.add(resetItem);
+        gameMenu.add(gameModeItem);
+    }
+    
+    public boolean isGameMode() {
+        return gameModeItem.isSelected();
     }
     
     public void addResetAction(ActionListener listener) {
