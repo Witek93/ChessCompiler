@@ -148,6 +148,9 @@ public class ChessController {
         view.addActionListenerBlack("Pawn", row, column, (ActionEvent e) -> {
             updatePieceOnField(row, column, new Pawn(Piece.Color.BLACK));
         });
+        view.addActionListenerBlack("NoPiece", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new NoPiece());
+        });
     }
 
     private void addWhitePieces(int row, int column) {
@@ -168,6 +171,9 @@ public class ChessController {
         });
         view.addActionListenerWhite("Pawn", row, column, (ActionEvent e) -> {
             updatePieceOnField(row, column, new Pawn(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("NoPiece", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new NoPiece());
         });
     }
 
