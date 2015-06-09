@@ -9,10 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-//        BoardScanner scanner = new BoardScanner(".\\src\\examples\\full_chessboard_to_scan");
-//        ChessBoard board = scanner.getBoard();
         ChessBoard board = new ChessBoard(8, 8);
-
         ChessFrame frame = new ChessFrame(8, 8);
 
         ChessController controller = new ChessController(frame, board);

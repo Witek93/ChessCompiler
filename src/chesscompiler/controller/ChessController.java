@@ -3,11 +3,18 @@ package chesscompiler.controller;
 import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Coordinates;
 import chesscompiler.model.pieces.*;
+import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class ChessController {
 
@@ -37,6 +44,28 @@ public class ChessController {
             model.reset();
             updateView();
         });
+        this.view.addOpenFileAction((ActionEvent e) -> {
+            JFileChooser fc = new JFileChooser();
+            if (fc.showOpenDialog(view) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    BoardScanner scanner = new BoardScanner(fc.getSelectedFile().getAbsolutePath());
+                    ChessBoard board = scanner.getBoard();
+                    model.reset();
+                    for (int i = 0; i < board.getRowsCount(); i++) {
+                        for (int j = 0; j < board.getColumnsCount(); j++) {
+                            model.addPiece(i, j, board.getPiece(i, j));
+                        }
+                    }
+                    updateView();
+                } catch (BoardScanner.BadFileFormatException ex) {
+                    JOptionPane.showMessageDialog(view, "Wrong file format!",
+                            "Open file error", JOptionPane.ERROR_MESSAGE);
+                } catch (FileNotFoundException ex) {
+                    JOptionPane.showMessageDialog(view, "File does not exists!",
+                            "Open file error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     public void setListener(final int row, final int column) {
@@ -57,9 +86,7 @@ public class ChessController {
 
             private void processLMBInGameMode() {
                 if (view.isHighlighted(row, column)) {
-                    model.move(Coordinates.fromArray(lastCoordinates), Coordinates.create(row, column));
-                    view.resetHighlight();
-                    updateView();
+                    movePieceAndResetHighlight(row, column);
                 } else {
                     view.resetHighlight();
                     lastCoordinates[0] = row;
@@ -70,12 +97,10 @@ public class ChessController {
                     }
                 }
             }
-            
+
             private void processLMBInEditMode() {
-                if(view.isHighlighted(lastCoordinates[0], lastCoordinates[1])) {
-                    model.move(Coordinates.fromArray(lastCoordinates), Coordinates.create(row, column));
-                    view.resetHighlight();
-                    updateView();
+                if (view.isHighlighted(lastCoordinates[0], lastCoordinates[1])) {
+                    movePieceAndResetHighlight(row, column);
                 } else {
                     view.highlightField(Coordinates.create(row, column));
                     lastCoordinates[0] = row;
@@ -90,6 +115,12 @@ public class ChessController {
             }
 
         });
+    }
+
+    private void movePieceAndResetHighlight(int row, int column) {
+        model.move(Coordinates.fromArray(lastCoordinates), Coordinates.create(row, column));
+        view.resetHighlight();
+        updateView();
     }
 
     public void addActionListener(final int row, final int column) {
