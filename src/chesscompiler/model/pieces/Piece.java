@@ -27,6 +27,11 @@ public abstract class Piece {
     abstract public String[] getDefaultMoves(String coordiantes, ChessBoard board);
     
     public abstract Image getImage();
+
+    //TODO
+    boolean hasMoved(String coordinates) {
+        return false;
+    }
     
     public enum Color {
         

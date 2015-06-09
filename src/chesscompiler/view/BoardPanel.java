@@ -25,6 +25,7 @@ public class BoardPanel extends JPanel {
         fields = new Field[rowsCount][columnsCount];
         setLayout(new GridLayout(rowsCount, columnsCount, 1, 1));
         initFields();
+        
     }
 
     private void initFields() {
