@@ -11,8 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -21,11 +19,13 @@ public class ChessController {
     private final ChessFrame view;
     private final ChessBoard model;
     private final int[] lastCoordinates;
+    private boolean whiteMoves;
 
     public ChessController(ChessFrame view, ChessBoard model) {
         this.view = view;
         this.model = model;
         this.lastCoordinates = new int[2];
+        this.whiteMoves = true;
     }
 
     public void start() {
@@ -44,7 +44,12 @@ public class ChessController {
             model.reset();
             updateView();
         });
-        
+
+        this.view.addGameModeAction((ActionEvent e) -> {
+            this.whiteMoves = true;
+            model.resetState();
+        });
+
         this.view.addOpenFileAction((ActionEvent e) -> {
             JFileChooser fc = new JFileChooser();
             if (fc.showOpenDialog(view) == JFileChooser.APPROVE_OPTION) {
@@ -88,14 +93,25 @@ public class ChessController {
             private void processLMBInGameMode() {
                 if (view.isHighlighted(row, column)) {
                     movePieceAndResetHighlight(row, column);
-                } else {
-                    view.resetHighlight();
-                    lastCoordinates[0] = row;
-                    lastCoordinates[1] = column;
-                    System.out.println(Arrays.toString(model.getValidMoves(lastCoordinates)));
-                    for (String fieldCoordinates : model.getValidMoves(lastCoordinates)) {
-                        view.highlightField(fieldCoordinates);
+                        whiteMoves = !whiteMoves;
+                } else if (whiteMoves) {
+                    if (model.isWhitePiece(row, column)) {
+                        processMovement();
                     }
+                } else {
+                    if (model.isBlackPiece(row, column)) {
+                        processMovement();
+                    }
+                }
+            }
+
+            private void processMovement() {
+                view.resetHighlight();
+                lastCoordinates[0] = row;
+                lastCoordinates[1] = column;
+                System.out.println(Arrays.toString(model.getValidMoves(lastCoordinates)));
+                for (String fieldCoordinates : model.getValidMoves(lastCoordinates)) {
+                    view.highlightField(fieldCoordinates);
                 }
             }
 

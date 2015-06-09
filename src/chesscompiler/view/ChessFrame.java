@@ -73,6 +73,10 @@ public class ChessFrame extends JFrame {
         gameMenu.add(editModeItem);
     }
 
+    public void addGameModeAction(ActionListener listener) {
+        gameModeItem.addActionListener(listener);
+    }
+    
     public boolean isGameMode() {
         return gameModeItem.isSelected();
     }

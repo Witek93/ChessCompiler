@@ -16,6 +16,14 @@ public class ChessBoard {
     public void reset() {
         initializeFields();
     }
+    
+    public void resetState() {
+        for(Field[] rows: fields) {
+            for(Field field: rows) {
+                field.getPiece().setMoved(false);
+            }
+        }
+    }
 
     private void initializeFields() {
         for (int i = 0; i < getRowsCount(); i++) {
@@ -99,6 +107,14 @@ public class ChessBoard {
             return false;
         }
         return true;
+    }
+    
+    public boolean isBlackPiece(int row, int column) {
+        return getPiece(row, column).isBlack();
+    }
+    
+    public boolean isWhitePiece(int row, int column) {
+        return getPiece(row, column).isWhite();
     }
 
     public int getRowsCount() {
