@@ -30,11 +30,6 @@ public class Queen extends Piece {
     }
 
     @Override
-    public String toString() {
-        return this.color + " queen";
-    }
-
-    @Override
     public Image getImage() {
         return img;
     }

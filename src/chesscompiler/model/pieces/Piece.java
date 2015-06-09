@@ -7,10 +7,6 @@ import java.awt.Image;
 public abstract class Piece {
     Color color;
     Image img;
-    
-    public void setColor(Color color) {
-        this.color = color;
-    }
 
     public Color getColor() {
         return color;

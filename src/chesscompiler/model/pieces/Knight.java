@@ -28,11 +28,6 @@ public class Knight extends Piece {
     }
 
     @Override
-    public String toString() {
-        return this.color + " knight";
-    }
-
-    @Override
     public Image getImage() {
         return img;
     }

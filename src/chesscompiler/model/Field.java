@@ -10,10 +10,6 @@ public class Field {
     public Field() {
         this.piece = new NoPiece();
     }
-    
-    public Field(Piece piece) {
-        this.piece = piece;
-    }
 
     public Piece getPiece() {
         return piece;
@@ -27,7 +23,5 @@ public class Field {
     public String toString() {
         return piece.toString();
     }
-    
-    
-    
+   
 }

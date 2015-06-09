@@ -79,9 +79,4 @@ public class Pawn extends Piece {
     private boolean canMoveTwice(ChessBoard board, String frontfront) {
         return !board.isOccupied(frontfront);
     }
-
-    @Override
-    public String toString() {
-        return this.color + " pawn";
-    }
 }

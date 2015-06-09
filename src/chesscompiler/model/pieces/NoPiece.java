@@ -9,11 +9,6 @@ public class NoPiece extends Piece {
     }
 
     @Override
-    public String toString() {
-        return "no piece";
-    }
-
-    @Override
     public Image getImage() {
         return img;
     }
