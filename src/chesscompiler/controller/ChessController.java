@@ -2,9 +2,7 @@ package chesscompiler.controller;
 
 import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Coordinates;
-import chesscompiler.model.pieces.King;
-import chesscompiler.model.pieces.Piece;
-import chesscompiler.model.pieces.Queen;
+import chesscompiler.model.pieces.*;
 import chesscompiler.view.ChessFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +64,7 @@ public class ChessController {
     
     public void addActionListener(final int row, final int column) {
         addBlackPieces(row, column);
+        addWhitePieces(row, column);
     }
     
     private void addBlackPieces(int row, int column){
@@ -75,8 +74,41 @@ public class ChessController {
         view.addActionListenerBlack("Queen", row, column, (ActionEvent e) -> {
             updatePieceOnField(row, column, new Queen(Piece.Color.BLACK));
         });
+        view.addActionListenerBlack("Bishop", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Bishop(Piece.Color.BLACK));
+        });
+        view.addActionListenerBlack("Rook", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Rook(Piece.Color.BLACK));
+        });
+        view.addActionListenerBlack("Knight", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Knight(Piece.Color.BLACK));
+        });
+        view.addActionListenerBlack("Pawn", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Pawn(Piece.Color.BLACK));
+        });   
     }
 
+    private void addWhitePieces(int row, int column){
+        view.addActionListenerWhite("King", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new King(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("Queen", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Queen(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("Bishop", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Bishop(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("Rook", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Rook(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("Knight", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Knight(Piece.Color.WHITE));
+        });
+        view.addActionListenerWhite("Pawn", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Pawn(Piece.Color.WHITE));
+        });   
+    }
+    
     private void updatePieceOnField(final int row, final int column, Piece piece) {
         model.addPiece(row, column, piece);
         updateView();
