@@ -2,13 +2,16 @@ package chesscompiler.view;
 
 import chesscompiler.model.Coordinates;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 /**
  *
@@ -17,21 +20,26 @@ import javax.swing.JMenuItem;
 public class ChessFrame extends JFrame {
 
     private BoardPanel board;
-    private JMenuItem resetItem;
+    private JMenuItem resetItem, openFileItem;
+    private JRadioButtonMenuItem gameModeItem, editModeItem;
 
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
+        this.openFileItem = new JMenuItem("Open");
         this.resetItem = new JMenuItem("Reset");
-        
+        this.gameModeItem = new JRadioButtonMenuItem("Game Mode");
+        this.editModeItem = new JRadioButtonMenuItem("Edit Mode");
+        editModeItem.setSelected(true);
+
         setTitle("Chess game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600, 600);
-        
+
         initMenuBar();
-        
+
         add(this.board);
     }
-    
+
     private void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -39,10 +47,39 @@ public class ChessFrame extends JFrame {
         menuBar.add(fileMenu);
         menuBar.add(gameMenu);
         setJMenuBar(menuBar);
-        
+
+        JMenuItem closeItem = new JMenuItem("Close");
+        closeItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        fileMenu.add(closeItem);
+        fileMenu.add(openFileItem);
+
         gameMenu.add(resetItem);
+        gameMenu.addSeparator();
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(gameModeItem);
+        group.add(editModeItem);
+        gameMenu.add(gameModeItem);
+        gameMenu.add(editModeItem);
+    }
+
+    public boolean isGameMode() {
+        return gameModeItem.isSelected();
+    }
+
+    public boolean isEditMode() {
+        return editModeItem.isSelected();
     }
     
+    public void addOpenFileAction(ActionListener listener) {
+        openFileItem.addActionListener(listener);
+    }
+
     public void addResetAction(ActionListener listener) {
         resetItem.addActionListener(listener);
     }
@@ -75,7 +112,7 @@ public class ChessFrame extends JFrame {
     public void addActionListenerWhite(String text, int row, int column, ActionListener listener) {
         board.addActionListenerWhite(text, row, column, listener);
     }
-    
+
     public void addActionListenerBlack(String text, int row, int column, ActionListener listener) {
         board.addActionListenerBlack(text, row, column, listener);
     }

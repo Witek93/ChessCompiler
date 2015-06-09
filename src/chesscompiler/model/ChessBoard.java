@@ -41,8 +41,9 @@ public class ChessBoard {
     private void move(int fromRow, int fromColumn, int toRow, int toColumn) {
         Field source = getField(fromRow, fromColumn);
         Field destination = getField(toRow, toColumn);
-        destination.setPiece(source.getPiece());
+        Piece sourcePiece = source.getPiece();
         source.setPiece(new NoPiece());
+        destination.setPiece(sourcePiece);
     }
 
     public void move(String from, String to) {
