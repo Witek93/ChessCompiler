@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -14,17 +18,13 @@ import javax.swing.JPanel;
  */
 public class BoardPanel extends JPanel {
 
-    Field[][] fields;  
-    ContextMenu contextMenu;
+    Field[][] fields;
     private static final Color HIGHLIGHT_COLOR = new Color(80, 179, 45);
-       
+
     public BoardPanel(int rowsCount, int columnsCount) {
         fields = new Field[rowsCount][columnsCount];
-
         setLayout(new GridLayout(rowsCount, columnsCount, 1, 1));
-
-        initFields();       
-        initContextMenu();
+        initFields();
     }
 
     private void initFields() {
@@ -39,11 +39,6 @@ public class BoardPanel extends JPanel {
             }
         }
     }
-    
-        
-    public void initContextMenu(){
-        contextMenu = new ContextMenu();
-    }
 
     public int getRowsCount() {
         return fields.length;
@@ -56,7 +51,7 @@ public class BoardPanel extends JPanel {
     public void highlightField(int row, int column) {
         getField(row, column).highlight();
     }
-    
+
     public boolean isHighlighted(int row, int column) {
         return getField(row, column).isHighlighed();
     }
@@ -80,20 +75,50 @@ public class BoardPanel extends JPanel {
             }
         }
     }
-    
-    public void showMenu(int row, int column, MouseEvent e){
-        getField(row,column).showMenu(e);
+
+    public void showMenu(int row, int column, MouseEvent e) {
+        getField(row, column).showMenu(e);
+    }
+
+    public void addActionListenerWhite(String text, int row, int column, ActionListener listener) {
+        getField(row, column).addActionListenerWhite(text, listener);
     }
     
+    public void addActionListenerBlack(String text, int row, int column, ActionListener listener) {
+        getField(row, column).addActionListenerBlack(text, listener);
+    }
+    
+    
+
     private class Field extends JPanel {
 
         private Image image;
         private final Color backgroundColor;
+        private JPopupMenu contextMenu;
+        private JMenu blackSubMenu, whiteSubMenu;
 
         public Field(Color backgroundColor) {
             this.image = null;
             this.backgroundColor = backgroundColor;
+            this.contextMenu = new JPopupMenu();
+            this.blackSubMenu = new JMenu("Black");
+            this.whiteSubMenu = new JMenu("White");
             setBackground(backgroundColor);
+            
+            this.contextMenu.add(blackSubMenu);
+            this.contextMenu.add(whiteSubMenu);
+        }
+
+        public void addActionListenerWhite(String text, ActionListener listener) {
+            JMenuItem item = new JMenuItem(text);
+            item.addActionListener(listener);
+            whiteSubMenu.add(item);
+        }
+        
+        public void addActionListenerBlack(String text, ActionListener listener) {
+            JMenuItem item = new JMenuItem(text);
+            item.addActionListener(listener);
+            blackSubMenu.add(item);
         }
 
         @Override
@@ -113,12 +138,12 @@ public class BoardPanel extends JPanel {
         public void highlight() {
             setBackground(HIGHLIGHT_COLOR);
         }
-        
+
         public boolean isHighlighed() {
             return this.getBackground().equals(HIGHLIGHT_COLOR);
         }
-        
-        public void showMenu(MouseEvent e){
+
+        public void showMenu(MouseEvent e) {
             contextMenu.show(Field.this, e.getX(), e.getY());
         }
     }
