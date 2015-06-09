@@ -25,12 +25,7 @@ public class Rook extends Piece {
         }
 
     }
-
-    @Override
-    public String toString() {
-        return this.color + " rook";
-    }
-
+    
     @Override
     public Image getImage() {
         return img;

@@ -110,9 +110,4 @@ public class ChessBoard {
     public Piece getPiece(int row, int column) {
         return getField(row, column).getPiece();
     }
-
-    public String fieldToString(int x, int y) {
-        return fields[x][y].toString();
-    }
-
 }

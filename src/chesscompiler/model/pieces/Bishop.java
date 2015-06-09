@@ -27,11 +27,6 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public String toString() {
-        return this.color + " bishop";
-    }
-
-    @Override
     public Image getImage() {
         return this.img;
     }

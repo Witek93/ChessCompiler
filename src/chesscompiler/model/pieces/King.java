@@ -32,11 +32,6 @@ public class King extends Piece {
     }
 
     @Override
-    public String toString() {
-        return this.color + " king";
-    }
-
-    @Override
     public Image getImage() {
         return img;
     }
