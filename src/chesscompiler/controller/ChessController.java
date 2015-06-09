@@ -46,6 +46,7 @@ public class ChessController {
 
         this.view.addGameModeAction((ActionEvent e) -> {
             this.whiteMoves = true;
+            view.setStatus("Turn of whites");
             model.resetState();
         });
 
@@ -93,8 +94,10 @@ public class ChessController {
                 if (view.isHighlighted(row, column)) {
                     movePieceAndResetHighlight(row, column);
                     whiteMoves = !whiteMoves;
+                    view.setStatus("Turn of " + (whiteMoves ? "whites" : "blacks"));
                 } else if (whiteMoves) {
                     if (model.isWhiteKingChecked()) {
+                        view.setStatus("Turn of whites | Your king is checked!");
                         int[] cords = model.getWhiteKingCoordinates();
                         if (model.getValidMoves(cords).length == 0) {
                             JOptionPane.showMessageDialog(view, "Black pieces won!");
@@ -106,6 +109,7 @@ public class ChessController {
                     }
                 } else {
                     if (model.isBlackKingChecked()) {
+                        view.setStatus("Turn of blacks | Your king is checked!");
                         int[] cords = model.getBlackKingCoordinates();
                         if (model.getValidMoves(cords).length == 0) {
                             JOptionPane.showMessageDialog(view, "White pieces won!");

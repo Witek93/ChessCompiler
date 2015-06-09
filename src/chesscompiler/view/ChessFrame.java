@@ -1,6 +1,8 @@
 package chesscompiler.view;
 
 import chesscompiler.model.Coordinates;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -10,9 +12,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 
 /**
@@ -21,12 +25,14 @@ import javax.swing.JRadioButtonMenuItem;
  */
 public class ChessFrame extends JFrame {
 
-    private BoardPanel board;
-    private JMenuItem resetItem, openFileItem;
-    private JRadioButtonMenuItem gameModeItem, editModeItem;
+    private final BoardPanel board;
+    private final JLabel statusLabel;
+    private final JMenuItem resetItem, openFileItem;
+    private final JRadioButtonMenuItem gameModeItem, editModeItem;
 
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
+        this.statusLabel = new JLabel("OK.", JLabel.CENTER);
         this.openFileItem = new JMenuItem("Open");
         this.resetItem = new JMenuItem("Reset");
         this.gameModeItem = new JRadioButtonMenuItem("Game Mode");
@@ -38,8 +44,13 @@ public class ChessFrame extends JFrame {
         setSize(600, 600);
 
         initMenuBar();
+        
+        JPanel statusPanel = new JPanel();
+        statusPanel.add(statusLabel);
+        statusPanel.setBackground(Color.white);
+        add(statusPanel, BorderLayout.SOUTH);
 
-        add(this.board);
+        add(this.board, BorderLayout.CENTER);
         
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
@@ -124,6 +135,10 @@ public class ChessFrame extends JFrame {
 
     public void addActionListenerBlack(String text, int row, int column, ActionListener listener) {
         board.addActionListenerBlack(text, row, column, listener);
+    }
+    
+    public void setStatus(String text) {
+        statusLabel.setText(text);
     }
 
 }
