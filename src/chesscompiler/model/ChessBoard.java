@@ -43,6 +43,7 @@ public class ChessBoard {
         Field destination = getField(toRow, toColumn);
         Piece sourcePiece = source.getPiece();
         source.setPiece(new NoPiece());
+        sourcePiece.setMoved(true);
         destination.setPiece(sourcePiece);
     }
 

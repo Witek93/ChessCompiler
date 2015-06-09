@@ -5,11 +5,23 @@ import java.awt.Image;
 
 
 public abstract class Piece {
-    Color color;
-    Image img;
+    protected Color color;
+    protected Image img;
+    protected boolean moved;
 
     public Color getColor() {
         return color;
+    }
+
+    public boolean hasMoved() {
+        return moved;
+    }
+
+    public void setMoved(boolean moved) {
+        if(!this.moved) {
+            System.out.println("This was a first move");
+        }
+        this.moved = moved;
     }
     
     abstract public String[] getDefaultMoves(String coordiantes, ChessBoard board);

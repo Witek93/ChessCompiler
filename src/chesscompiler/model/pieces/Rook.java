@@ -13,6 +13,7 @@ public class Rook extends Piece {
 
     public Rook(Color color) {
         this.color = color;
+        this.moved = false;
 
         try {
             if (color.equals(Color.WHITE)) {

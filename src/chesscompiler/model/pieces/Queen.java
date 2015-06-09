@@ -16,6 +16,7 @@ public class Queen extends Piece {
 
     public Queen(Color color) {
         this.color = color;
+        this.moved = false;
 
         try {
             if (color.equals(Color.WHITE)) {

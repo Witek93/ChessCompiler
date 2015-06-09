@@ -15,6 +15,7 @@ public class Pawn extends Piece {
 
     public Pawn(Color color) {
         this.color = color;
+        this.moved = false;
 
         try {
             if (color.equals(Color.WHITE)) {

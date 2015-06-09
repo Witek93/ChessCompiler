@@ -13,6 +13,7 @@ public class Bishop extends Piece{
 
     public Bishop(Color color) {
         this.color = color;
+        this.moved = false;
 
         try {
             if (color.equals(Color.WHITE)) {

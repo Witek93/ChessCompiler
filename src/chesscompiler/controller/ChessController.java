@@ -44,6 +44,7 @@ public class ChessController {
             model.reset();
             updateView();
         });
+        
         this.view.addOpenFileAction((ActionEvent e) -> {
             JFileChooser fc = new JFileChooser();
             if (fc.showOpenDialog(view) == JFileChooser.APPROVE_OPTION) {

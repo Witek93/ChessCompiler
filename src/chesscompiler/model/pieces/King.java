@@ -18,6 +18,7 @@ public class King extends Piece {
 
     public King(Color color) {
         this.color = color;
+        this.moved = false;
 
         try {
             if (color.equals(Color.WHITE)) {

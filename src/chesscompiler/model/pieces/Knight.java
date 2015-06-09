@@ -15,6 +15,8 @@ public class Knight extends Piece {
 
     public Knight(Color color) {
         this.color = color;
+        this.moved = false;
+        
         try {
             if (color.equals(Color.WHITE)) {
                 img = ImageIO.read(new File(".\\resource\\images\\Chess_nlt60.png"));
