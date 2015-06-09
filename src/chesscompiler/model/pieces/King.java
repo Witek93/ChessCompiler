@@ -69,6 +69,7 @@ public class King extends Piece {
                 i++;
             }
         }        
+        moves.addAll(castling(board, coordiantes));
         return moves;
     }
     
@@ -79,16 +80,33 @@ public class King extends Piece {
             for(int j=0; j<board.getColumnsCount(); j++){
                 Piece piece = board.getPiece(i, j);
                 int coord[] = {i, j};
-                if (board.areEnemies(coordinates, Coordinates.create(i,j)) && !piece.getClass().equals(King.class)){
+                if (board.areEnemies(coordinates, Coordinates.create(i,j)) && !(piece instanceof King)){
                     String[] enemyMoves = board.getValidMoves(coord);
                     moves2.addAll(Arrays.asList(enemyMoves));
                 }
-                else if (board.areEnemies(coordinates, Coordinates.create(i,j)) && piece.getClass().equals(King.class)){
+                else if (board.areEnemies(coordinates, Coordinates.create(i,j)) && piece instanceof King){
                     List<String> enemyKingMoves = getMoves(Coordinates.create(i,j), board);
                     moves2.addAll(enemyKingMoves);
                 }
             }
         moves.removeAll(moves2);
         return moves.toArray(new String[moves.size()]);
+    }
+
+    public List<String> castling(ChessBoard board, String coordinates){
+        List<String> moves = new LinkedList();
+        if (coordinates.equals("E1") && !hasMoved("E1")){
+            if(!board.isOccupied("F1") && !board.isOccupied("G1") && !hasMoved("H1"))
+                moves.add("G1");
+            if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !hasMoved("A1"))
+                moves.add("C1");
+        }
+        else if (coordinates.equals("E8") && !hasMoved("E8")){
+            if(!board.isOccupied("F8") && !board.isOccupied("G8") && !hasMoved("H8"))
+                moves.add("G8");
+            if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !hasMoved("A8"))
+                moves.add("C8");    
+        }
+        return moves;
     }
 }
