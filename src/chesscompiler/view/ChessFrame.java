@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -13,15 +16,35 @@ import javax.swing.JFrame;
  */
 public class ChessFrame extends JFrame {
 
-    BoardPanel board;
+    private BoardPanel board;
+    private JMenuItem resetItem;
 
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
+        this.resetItem = new JMenuItem("Reset");
+        
         setTitle("Chess game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600, 600);
-
+        
+        initMenuBar();
+        
         add(this.board);
+    }
+    
+    private void initMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenu gameMenu = new JMenu("Game");
+        menuBar.add(fileMenu);
+        menuBar.add(gameMenu);
+        setJMenuBar(menuBar);
+        
+        gameMenu.add(resetItem);
+    }
+    
+    public void addResetAction(ActionListener listener) {
+        resetItem.addActionListener(listener);
     }
 
     public void updatePieceImage(int row, int column, Image image) {

@@ -94,20 +94,6 @@ public class ChessBoardKingTest {
     }
 
     @Test
-    // szach jednej wieży
-    public void testGetValidMoves_BlacKing_CheckIn_EnemyRook() {
-        ChessBoard board = new ChessBoard(8, 8);
-        board.addPiece("A8", new King(Piece.Color.BLACK));
-        board.addPiece("A6", new Rook(Piece.Color.WHITE));
-
-        String[] result = board.getValidMoves("A8");
-        String[] expResult = {"B7", "B8"};
-        Arrays.sort(result);
-        Arrays.sort(expResult);
-        assertArrayEquals(expResult, result);
-    }
-
-    @Test
     public void testGetValidMoves_BlacKing_CheckIn_EnemyQueenAndKnight() {
         ChessBoard board = new ChessBoard(8, 8);
         board.addPiece("A8", new King(Piece.Color.BLACK));
@@ -131,6 +117,20 @@ public class ChessBoardKingTest {
 
         String[] result = board.getValidMoves("A8");
         String[] expResult = {};
+        assertArrayEquals(expResult, result);
+    }
+    
+    @Test
+    // szach wieży
+    public void testGetValidMoves_BlacKing_CheckIn_EnemyRook() {
+        ChessBoard board = new ChessBoard(8, 8);
+        board.addPiece("F8", new King(Piece.Color.BLACK));
+        board.addPiece("B8", new Rook(Piece.Color.WHITE));
+
+        String[] result = board.getValidMoves("F8");
+        String[] expResult = {"G7", "F7", "E7"};
+        Arrays.sort(result);
+        Arrays.sort(expResult);
         assertArrayEquals(expResult, result);
     }
 
