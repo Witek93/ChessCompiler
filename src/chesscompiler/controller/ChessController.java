@@ -6,7 +6,6 @@ import chesscompiler.model.pieces.*;
 import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
@@ -82,7 +81,7 @@ public class ChessController {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     if (view.isGameMode()) {
                         processLMBInGameMode();
-                    } else {
+                    } else if (view.isEditMode()) {
                         processLMBInEditMode();
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -93,19 +92,33 @@ public class ChessController {
             private void processLMBInGameMode() {
                 if (view.isHighlighted(row, column)) {
                     movePieceAndResetHighlight(row, column);
-                        whiteMoves = !whiteMoves;
+                    whiteMoves = !whiteMoves;
                 } else if (whiteMoves) {
-                    if (model.isWhitePiece(row, column)) {
-                        processMovement();
+                    if (model.isWhiteKingChecked()) {
+                        int[] cords = model.getWhiteKingCoordinates();
+                        if (model.getValidMoves(cords).length == 0) {
+                            JOptionPane.showMessageDialog(view, "Black pieces won!");
+                        } else {
+                            processMovement(cords[0], cords[1]);
+                        }
+                    } else if (model.isWhitePiece(row, column)) {
+                        processMovement(row, column);
                     }
                 } else {
-                    if (model.isBlackPiece(row, column)) {
-                        processMovement();
+                    if (model.isBlackKingChecked()) {
+                        int[] cords = model.getBlackKingCoordinates();
+                        if (model.getValidMoves(cords).length == 0) {
+                            JOptionPane.showMessageDialog(view, "White pieces won!");
+                        } else {
+                            processMovement(cords[0], cords[1]);
+                        }
+                    } else if (model.isBlackPiece(row, column)) {
+                        processMovement(row, column);
                     }
                 }
             }
 
-            private void processMovement() {
+            private void processMovement(int row, int column) {
                 view.resetHighlight();
                 lastCoordinates[0] = row;
                 lastCoordinates[1] = column;

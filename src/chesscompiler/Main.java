@@ -15,9 +15,10 @@ public class Main {
         ChessController controller = new ChessController(frame, board);
         controller.start();
 
-        board.addPiece("A8", new King(Piece.Color.BLACK));
-        board.addPiece("H1", new Queen(Piece.Color.WHITE));
-        board.addPiece("D7", new Knight(Piece.Color.WHITE));
+        board.addPiece("A8", new King(Piece.Color.WHITE));
+        board.addPiece("A1", new Rook(Piece.Color.WHITE));
+        board.addPiece("H2", new Queen(Piece.Color.BLACK));
+        board.addPiece("D7", new Knight(Piece.Color.BLACK));
 
         controller.updateView();
 

@@ -1,5 +1,6 @@
 package chesscompiler.model;
 
+import chesscompiler.model.pieces.King;
 import chesscompiler.model.pieces.NoPiece;
 import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
@@ -12,17 +13,63 @@ public class ChessBoard {
         this.fields = new Field[rowsCount][columnsCount];
         initializeFields();
     }
-    
+
     public void reset() {
         initializeFields();
     }
-    
+
     public void resetState() {
-        for(Field[] rows: fields) {
-            for(Field field: rows) {
+        for (Field[] rows : fields) {
+            for (Field field : rows) {
                 field.getPiece().setMoved(false);
             }
         }
+    }
+
+    public int[] getBlackKingCoordinates() {
+        for (int i = 0; i < getRowsCount(); i++) {
+            for (int j = 0; j < getColumnsCount(); j++) {
+                Piece piece = fields[i][j].getPiece();
+                if (piece instanceof King) {
+                    if (piece.isBlack()) {
+                        return new int[]{i, j};
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isBlackKingChecked() {
+        int[] coordinates = getBlackKingCoordinates();
+        if (coordinates != null) {
+            String cords = Coordinates.fromArray(coordinates);
+            return ((King) getPiece(coordinates[0], coordinates[1])).isCheck(this, cords, cords);
+        }
+        return false;
+    }
+
+    public int[] getWhiteKingCoordinates() {
+        for (int i = 0; i < getRowsCount(); i++) {
+            for (int j = 0; j < getColumnsCount(); j++) {
+                Piece piece = fields[i][j].getPiece();
+                if (piece instanceof King) {
+                    if (piece.isWhite()) {
+                        return new int[]{i, j};
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isWhiteKingChecked() {
+        int[] coordinates = getWhiteKingCoordinates();
+        if (coordinates != null) {
+            String cords = Coordinates.fromArray(coordinates);
+            return ((King) getPiece(coordinates[0], coordinates[1])).isCheck(this, cords, cords);
+        }
+        return false;
     }
 
     private void initializeFields() {
@@ -108,11 +155,11 @@ public class ChessBoard {
         }
         return true;
     }
-    
+
     public boolean isBlackPiece(int row, int column) {
         return getPiece(row, column).isBlack();
     }
-    
+
     public boolean isWhitePiece(int row, int column) {
         return getPiece(row, column).isWhite();
     }
