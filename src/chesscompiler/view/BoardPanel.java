@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -79,29 +80,47 @@ public class BoardPanel extends JPanel {
         getField(row, column).showMenu(e);
     }
 
-    public void addActionListener(String text, int row, int column, ActionListener listener) {
-        getField(row, column).addActionListener(text, listener);
+    public void addActionListenerWhite(String text, int row, int column, ActionListener listener) {
+        getField(row, column).addActionListenerWhite(text, listener);
     }
+    
+    public void addActionListenerBlack(String text, int row, int column, ActionListener listener) {
+        getField(row, column).addActionListenerBlack(text, listener);
+    }
+    
+    
 
     private class Field extends JPanel {
 
         private Image image;
         private final Color backgroundColor;
         private JPopupMenu contextMenu;
+        private JMenu blackSubMenu, whiteSubMenu;
 
         public Field(Color backgroundColor) {
             this.image = null;
             this.backgroundColor = backgroundColor;
             this.contextMenu = new JPopupMenu();
+            this.blackSubMenu = new JMenu("Black");
+            this.whiteSubMenu = new JMenu("White");
             setBackground(backgroundColor);
+            
+            this.contextMenu.add(blackSubMenu);
+            this.contextMenu.add(whiteSubMenu);
         }
-        
-        public void addActionListener(String text, ActionListener listener) {
+
+        public void addActionListenerWhite(String text, ActionListener listener) {
             JMenuItem item = new JMenuItem(text);
             item.addActionListener(listener);
-            contextMenu.add(item);
+            whiteSubMenu.add(item);
         }
         
+        public void addActionListenerBlack(String text, ActionListener listener) {
+            JMenuItem item = new JMenuItem(text);
+            item.addActionListener(listener);
+            blackSubMenu.add(item);
+        }
+
         @Override
         public void paint(Graphics g) {
             super.paint(g);

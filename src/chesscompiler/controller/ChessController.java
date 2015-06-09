@@ -65,16 +65,14 @@ public class ChessController {
     }
     
     public void addActionListener(final int row, final int column) {
-        view.addActionListener("White King", row, column, (ActionEvent e) -> {
-            updatePieceOnField(row, column, new King(Piece.Color.WHITE));
-        });
-        view.addActionListener("Black King", row, column, (ActionEvent e) -> {
+        addBlackPieces(row, column);
+    }
+    
+    private void addBlackPieces(int row, int column){
+        view.addActionListenerBlack("King", row, column, (ActionEvent e) -> {
             updatePieceOnField(row, column, new King(Piece.Color.BLACK));
         });
-        view.addActionListener("White Queen", row, column, (ActionEvent e) -> {
-            updatePieceOnField(row, column, new Queen(Piece.Color.WHITE));
-        });
-        view.addActionListener("Black Queen", row, column, (ActionEvent e) -> {
+        view.addActionListenerBlack("Queen", row, column, (ActionEvent e) -> {
             updatePieceOnField(row, column, new Queen(Piece.Color.BLACK));
         });
     }

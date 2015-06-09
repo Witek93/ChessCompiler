@@ -49,8 +49,12 @@ public class ChessFrame extends JFrame {
         board.setMouseListener(row, column, listener);
     }
 
-    public void addActionListener(String text, int row, int column, ActionListener listener) {
-        board.addActionListener(text, row, column, listener);
+    public void addActionListenerWhite(String text, int row, int column, ActionListener listener) {
+        board.addActionListenerWhite(text, row, column, listener);
+    }
+    
+    public void addActionListenerBlack(String text, int row, int column, ActionListener listener) {
+        board.addActionListenerBlack(text, row, column, listener);
     }
 
 }
