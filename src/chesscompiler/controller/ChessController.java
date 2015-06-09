@@ -2,7 +2,12 @@ package chesscompiler.controller;
 
 import chesscompiler.model.ChessBoard;
 import chesscompiler.model.Coordinates;
+import chesscompiler.model.pieces.King;
+import chesscompiler.model.pieces.Piece;
+import chesscompiler.model.pieces.Queen;
 import chesscompiler.view.ChessFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -11,7 +16,7 @@ public class ChessController {
 
     private final ChessFrame view;
     private final ChessBoard model;
-    private static int[] lastCoordinates = new int[2];
+    private static final int[] lastCoordinates = new int[2];
 
     public ChessController(ChessFrame view, ChessBoard model) {
         this.view = view;
@@ -27,6 +32,7 @@ public class ChessController {
         for (int i = 0; i < model.getRowsCount(); i++) {
             for (int j = 0; j < model.getColumnsCount(); j++) {
                 setListener(i, j);
+                addActionListener(i, j);
             }
         }
     }
@@ -52,11 +58,30 @@ public class ChessController {
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     view.showMenu(row, column, e);
-
                 }
             }
 
         });
+    }
+    
+    public void addActionListener(final int row, final int column) {
+        view.addActionListener("White King", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new King(Piece.Color.WHITE));
+        });
+        view.addActionListener("Black King", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new King(Piece.Color.BLACK));
+        });
+        view.addActionListener("White Queen", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Queen(Piece.Color.WHITE));
+        });
+        view.addActionListener("Black Queen", row, column, (ActionEvent e) -> {
+            updatePieceOnField(row, column, new Queen(Piece.Color.BLACK));
+        });
+    }
+
+    private void updatePieceOnField(final int row, final int column, Piece piece) {
+        model.addPiece(row, column, piece);
+        updateView();
     }
 
     public void updateView() {
