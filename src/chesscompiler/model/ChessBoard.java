@@ -10,8 +10,16 @@ public class ChessBoard {
 
     public ChessBoard(int rowsCount, int columnsCount) {
         this.fields = new Field[rowsCount][columnsCount];
-        for (int i = 0; i < rowsCount; i++) {
-            for (int j = 0; j < columnsCount; j++) {
+        initializeFields();
+    }
+    
+    public void reset() {
+        initializeFields();
+    }
+
+    private void initializeFields() {
+        for (int i = 0; i < getRowsCount(); i++) {
+            for (int j = 0; j < getColumnsCount(); j++) {
                 this.fields[i][j] = new Field();
             }
         }

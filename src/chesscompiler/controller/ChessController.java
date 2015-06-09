@@ -24,6 +24,14 @@ public class ChessController {
     public void start() {
         this.view.setVisible(true);
         setListeners();
+        this.view.addResetAction(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.reset();
+                updateView();
+            }
+        });
     }
 
     public void setListeners() {
