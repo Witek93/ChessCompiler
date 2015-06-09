@@ -100,8 +100,37 @@ public class ChessBoard {
         source.setPiece(new NoPiece());
         sourcePiece.setMoved(true);
         destination.setPiece(sourcePiece);
+        
+        if (castled(sourcePiece, fromColumn, toColumn))
+            move(moveRookFrom(toRow, toColumn), moveRookTo(toRow, toColumn));
     }
 
+    public String moveRookFrom(int toRow, int toColumn){
+        String coord = Coordinates.create(toRow, toColumn);
+        if (coord.equals("G1"))
+            return "H1";
+        else if (coord.equals("C1"))
+            return "A1";
+        else if (coord.equals("G8"))
+            return "H8";
+        else return "A8";
+    }
+    
+    public String moveRookTo(int toRow, int toColumn){
+        String coord = Coordinates.create(toRow, toColumn);
+        if (coord.equals("G1"))
+            return "F1";
+        else if (coord.equals("C1"))
+            return "D1";
+        else if (coord.equals("G8"))
+            return "F8";
+        else return "D8";
+    }
+    
+    public boolean castled(Piece piece, int fromColumn, int toColumn){
+        return (piece instanceof King && Math.abs(fromColumn - toColumn)==2);
+    }    
+    
     public void move(String from, String to) {
         int[] source = Coordinates.toIntArray(from);
         int[] destination = Coordinates.toIntArray(to);
