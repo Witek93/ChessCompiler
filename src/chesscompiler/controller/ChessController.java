@@ -102,7 +102,7 @@ public class ChessController {
             private void processLMBInEditMode() {
                 if (view.isHighlighted(lastCoordinates[0], lastCoordinates[1])) {
                     movePieceAndResetHighlight(row, column);
-                } else {
+                } else if (model.isOccupied(Coordinates.create(row, column))) {
                     view.highlightField(Coordinates.create(row, column));
                     lastCoordinates[0] = row;
                     lastCoordinates[1] = column;
