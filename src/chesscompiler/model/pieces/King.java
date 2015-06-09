@@ -6,10 +6,8 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,7 +26,6 @@ public class King extends Piece {
         } catch (IOException ex) {
             Logger.getLogger(Bishop.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
@@ -38,7 +35,14 @@ public class King extends Piece {
 
     @Override
     public String[] getDefaultMoves(String coordiantes, ChessBoard board) {
-        return removeEvilFields(getMoves(coordiantes, board), coordiantes, board);
+        List<String> moves = getMoves(coordiantes, board);
+        for (int i=0; i<moves.size(); i++){
+            if (isCheck(board, coordiantes, moves.get(i))){
+                moves.remove(moves.get(i));
+                i--;
+            }
+        }
+        return moves.toArray(new String[moves.size()]);
     }
     
     private List<String> getMoves(String coordiantes, ChessBoard board){
@@ -64,33 +68,41 @@ public class King extends Piece {
                 i++;
             }
         }        
-        moves.addAll(castling(board, coordiantes));
+        //moves.addAll(castling(board, coordiantes));
         return moves;
     }
     
-    
-    private String[] removeEvilFields(List<String> moves, String coordinates, ChessBoard board){
-        Set<String> moves2 = new HashSet<>();
-        for (int i=0; i<board.getRowsCount(); i++)
-            for(int j=0; j<board.getColumnsCount(); j++){
-                Piece piece = board.getPiece(i, j);
-                int coord[] = {i, j};
-                if (board.areEnemies(coordinates, Coordinates.create(i,j)) && !(piece instanceof King)){
-                    String[] enemyMoves = board.getValidMoves(coord);
-                    moves2.addAll(Arrays.asList(enemyMoves));
+    // from, to - miejsce początkowe i końcowe przy przesuwaniu króla
+    public boolean isCheck(ChessBoard board, String from, String to){
+        ChessBoard newBoard = new ChessBoard(board.getRowsCount(), board.getColumnsCount());
+        for (int i=0; i<newBoard.getRowsCount(); i++)
+            for(int j=0; j<newBoard.getColumnsCount(); j++)
+                newBoard.addPiece(i, j, board.getPiece(i, j));
+        
+        newBoard.move(from, to);
+        for (int i=0; i<newBoard.getRowsCount(); i++)
+            for(int j=0; j<newBoard.getColumnsCount(); j++)
+              if(newBoard.isOccupied(Coordinates.create(i, j)) && !Coordinates.create(i, j).equals(to)){
+                Piece piece = newBoard.getPiece(i, j);
+                if (newBoard.areEnemies(to, Coordinates.create(i,j)) && !(piece instanceof King)){
+                    String[] enemyMoves = newBoard.getValidMoves(Coordinates.create(i, j));
+                    if(Arrays.asList(enemyMoves).contains(to)) {
+                        return true;
+                    }                
                 }
-                else if (board.areEnemies(coordinates, Coordinates.create(i,j)) && piece instanceof King){
-                    List<String> enemyKingMoves = getMoves(Coordinates.create(i,j), board);
-                    moves2.addAll(enemyKingMoves);
+                else if (newBoard.areEnemies(to, Coordinates.create(i,j)) && piece instanceof King){
+                    List<String> enemyKingMoves = getMoves(Coordinates.create(i,j), newBoard);
+                    if (enemyKingMoves.contains(to)){
+                        return true;
+                    }
                 }
-            }
-        moves.removeAll(moves2);
-        return moves.toArray(new String[moves.size()]);
+                }
+        return false;
     }
-
+    
     public List<String> castling(ChessBoard board, String coordinates){
         List<String> moves = new LinkedList();
-        if (coordinates.equals("E1") && !hasMoved("E1")){
+/*        if (coordinates.equals("E1") && !hasMoved("E1")){
             if(!board.isOccupied("F1") && !board.isOccupied("G1") && !hasMoved("H1"))
                 moves.add("G1");
             if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !hasMoved("A1"))
@@ -102,7 +114,7 @@ public class King extends Piece {
             if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !hasMoved("A8"))
                 moves.add("C8");    
         }
-        return moves;
+  */      return moves;
     }
     
     

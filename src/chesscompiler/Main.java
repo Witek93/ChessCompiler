@@ -19,7 +19,7 @@ public class Main {
         controller.start();
 
         board.addPiece("E1", new King(Piece.Color.WHITE));
-        board.addPiece("H1", new Rook(Piece.Color.WHITE));
+        board.addPiece("H1", new Rook(Piece.Color.BLACK));
         board.addPiece("A1", new Rook(Piece.Color.WHITE));
         board.addPiece("B1", new Pawn(Piece.Color.WHITE));
 
