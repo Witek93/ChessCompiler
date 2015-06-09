@@ -106,16 +106,16 @@ public class King extends Piece {
 
     public List<String> castling(ChessBoard board, String coordinates) {
         List<String> moves = new LinkedList();
-            if (coordinates.equals("E1") && !hasMoved("E1")){
-                if(!board.isOccupied("F1") && !board.isOccupied("G1") && !hasMoved("H1") && board.getPiece(7, 7) instanceof Rook)
+            if (coordinates.equals("E1") && !(board.getPiece(0, 4).hasMoved())){
+                if(!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece(7, 0).hasMoved()) && board.getPiece(7, 0) instanceof Rook)
                     moves.add("G1");
-                if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !hasMoved("A1") && board.getPiece(7, 0) instanceof Rook)
+                else if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece(7, 0).hasMoved()) && board.getPiece(7, 0) instanceof Rook)
                     moves.add("C1");
             }
-            else if (coordinates.equals("E8") && !hasMoved("E8")){
-                if(!board.isOccupied("F8") && !board.isOccupied("G8") && !hasMoved("H8") && board.getPiece(0, 7) instanceof Rook)
+            else if (coordinates.equals("E8") && !(board.getPiece(7, 4).hasMoved())){
+                if(!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece(7, 7).hasMoved()) && board.getPiece(7, 7) instanceof Rook)
                     moves.add("G8");
-                if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !hasMoved("A8") && board.getPiece(0, 0) instanceof Rook)
+                else if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !(board.getPiece(0, 7).hasMoved()) && board.getPiece(0, 7) instanceof Rook)
                     moves.add("C8");    
             }
         return moves;
