@@ -84,7 +84,7 @@ public class ChessController {
             }
 
             private void processRightClick(MouseEvent e) {
-                if (!view.isGameMode()) {
+                if (view.isEditMode()) {
                     view.showMenu(row, column, e);
                 }
             }

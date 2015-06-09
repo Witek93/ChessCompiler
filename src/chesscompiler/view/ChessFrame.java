@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,12 +20,14 @@ public class ChessFrame extends JFrame {
 
     private BoardPanel board;
     private JMenuItem resetItem;
-    private JRadioButtonMenuItem gameModeItem;
+    private JRadioButtonMenuItem gameModeItem, editModeItem;
 
     public ChessFrame(int rows, int columns) {
         this.board = new BoardPanel(rows, columns);
         this.resetItem = new JMenuItem("Reset");
         this.gameModeItem = new JRadioButtonMenuItem("Game Mode");
+        this.editModeItem = new JRadioButtonMenuItem("Edit Mode");
+        editModeItem.setSelected(true);
         
         setTitle("Chess game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,11 +47,21 @@ public class ChessFrame extends JFrame {
         setJMenuBar(menuBar);
         
         gameMenu.add(resetItem);
+        gameMenu.addSeparator();
+        
+        ButtonGroup group = new ButtonGroup();
+        group.add(gameModeItem);
+        group.add(editModeItem);
         gameMenu.add(gameModeItem);
+        gameMenu.add(editModeItem);
     }
     
     public boolean isGameMode() {
         return gameModeItem.isSelected();
+    }
+    
+    public boolean isEditMode() {
+        return editModeItem.isSelected();
     }
     
     public void addResetAction(ActionListener listener) {
