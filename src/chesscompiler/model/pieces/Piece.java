@@ -16,6 +16,7 @@ public abstract class Piece {
     
     public abstract Image getImage();
 
+    //TODO
     boolean hasMoved(String coordinates) {
         return false;
     }
