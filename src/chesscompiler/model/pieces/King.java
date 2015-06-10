@@ -106,23 +106,25 @@ public class King extends Piece {
 
     public List<String> castling(ChessBoard board, String coordinates) {
         List<String> moves = new LinkedList();
-            if (coordinates.equals("E1") && !(board.getPiece("E1").hasMoved())){
-                if(!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece("H1").hasMoved()) && board.getPiece("H1") instanceof Rook)
-                    moves.add("G1");
-                if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece("A1").hasMoved()) && board.getPiece("A1") instanceof Rook)
-                 {
-                     moves.add("C1");
-            }}
-            else if (coordinates.equals("E8") && !(board.getPiece("E8").hasMoved())){
-                if(!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece("H8").hasMoved()) && board.getPiece("H8") instanceof Rook)
-                    moves.add("G8");
-                if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !(board.getPiece("A8").hasMoved()) && board.getPiece("A8") instanceof Rook)
-                    moves.add("C8");    
+        if (coordinates.equals("E1") && !(board.getPiece("E1").hasMoved())) {
+            if (!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece("H1").hasMoved()) && board.getPiece("H1") instanceof Rook) {
+                moves.add("G1");
             }
             if (!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece("A1").hasMoved()) && board.getPiece("A1") instanceof Rook) {
                 moves.add("C1");
             }
         } else if (coordinates.equals("E8") && !(board.getPiece("E8").hasMoved())) {
+            if (!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece("H8").hasMoved()) && board.getPiece("H8") instanceof Rook) {
+                moves.add("G8");
+            }
+            if (!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !(board.getPiece("A8").hasMoved()) && board.getPiece("A8") instanceof Rook) {
+                moves.add("C8");
+            }
+        }
+        if (!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece("A1").hasMoved()) && board.getPiece("A1") instanceof Rook) {
+            moves.add("C1");
+        } else if (coordinates.equals(
+                "E8") && !(board.getPiece("E8").hasMoved())) {
             if (!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece("H8").hasMoved()) && board.getPiece("H8") instanceof Rook) {
                 moves.add("G8");
             }
