@@ -93,10 +93,10 @@ public class Pawn extends Piece {
                 if (board.areEnemies(Coordinates.create(3, j+1), Coordinates.create(3, j))) {
                     Piece pieceBlack = board.getPiece(3, j+1);
                     Piece pieceWhite = board.getPiece(3, j);
-                    if (((pieceBlack instanceof Pawn) && pieceBlack.hasMoved()) && 
-                       (pieceWhite instanceof Pawn) && pieceWhite.hasMoved(Coordinates.create(1, j), Coordinates.create(3, j))){
+                //    if (((pieceBlack instanceof Pawn) && pieceBlack.hasMoved()) && 
+                  //     (pieceWhite instanceof Pawn) && pieceWhite.hasMoved(Coordinates.create(1, j), Coordinates.create(3, j))){
                         return true; 
-                    }
+                  //  }
                 }
             }
         return false;
@@ -107,11 +107,12 @@ public class Pawn extends Piece {
             if (board.areEnemies(Coordinates.create(4, j+1), Coordinates.create(4, j))) {
                 Piece pieceWhite = board.getPiece(4, j+1);
                 Piece pieceBlack = board.getPiece(4, j);
-                if (((pieceWhite instanceof Pawn) && !pieceWhite.hasMoved()) && pieceBlack.hasMoved(Coordinates.create(7, j), Coordinates.create(4, j))){
+                //if (((pieceWhite instanceof Pawn) && !pieceWhite.hasMoved()) && pieceBlack.hasMoved(Coordinates.create(7, j), Coordinates.create(4, j))){
                     return true;    
-                }
+                //}
             }
         }
         return false;
     }
+
 }

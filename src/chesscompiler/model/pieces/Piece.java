@@ -3,16 +3,26 @@ package chesscompiler.model.pieces;
 import chesscompiler.model.ChessBoard;
 import java.awt.Image;
 
-public abstract class Piece {
+public abstract class Piece implements Cloneable{
 
     protected Color color;
     protected Image img;
     protected boolean moved;
-
+    
     public Color getColor() {
         return color;
     }
-
+    
+    @Override
+    public Object clone() {
+	//shallow copy
+	try {
+	  return super.clone();
+	} catch (CloneNotSupportedException e) {
+	  return null;
+	}
+    }
+  
     public boolean isBlack() {
         if (color != null) {
             return color.equals(Color.BLACK);
@@ -38,11 +48,6 @@ public abstract class Piece {
     abstract public String[] getDefaultMoves(String coordiantes, ChessBoard board);
 
     public abstract Image getImage();
-
-    //TODO
-    boolean hasMoved(String coordinates) {
-        return false;
-    }
 
     public enum Color {
 

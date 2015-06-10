@@ -102,35 +102,9 @@ public class ChessBoard {
         destination.setPiece(sourcePiece);
         
         if (castled(sourcePiece, fromColumn, toColumn))
-            move(moveRookFrom(toRow, toColumn), moveRookTo(toRow, toColumn));
+            move(moveRook(toRow, toColumn)[0], moveRook(toRow, toColumn)[1]);
     }
-
-    public String moveRookFrom(int toRow, int toColumn){
-        String coord = Coordinates.create(toRow, toColumn);
-        if (coord.equals("G1"))
-            return "H1";
-        else if (coord.equals("C1"))
-            return "A1";
-        else if (coord.equals("G8"))
-            return "H8";
-        else return "A8";
-    }
-    
-    public String moveRookTo(int toRow, int toColumn){
-        String coord = Coordinates.create(toRow, toColumn);
-        if (coord.equals("G1"))
-            return "F1";
-        else if (coord.equals("C1"))
-            return "D1";
-        else if (coord.equals("G8"))
-            return "F8";
-        else return "D8";
-    }
-    
-    public boolean castled(Piece piece, int fromColumn, int toColumn){
-        return (piece instanceof King && Math.abs(fromColumn - toColumn)==2);
-    }    
-    
+        
     public void move(String from, String to) {
         int[] source = Coordinates.toIntArray(from);
         int[] destination = Coordinates.toIntArray(to);
@@ -138,6 +112,34 @@ public class ChessBoard {
             move(source[0], source[1], destination[0], destination[1]);
         }
     }
+
+    public String[] moveRook(int toRow, int toColumn){
+        String coord = Coordinates.create(toRow, toColumn);
+        String[] moves = new String[2];
+        switch (coord) {
+            case "G1":
+                moves[0]="H1";
+                moves[1]="F1";
+                break;
+            case "C1":
+                moves[0]="A1";
+                moves[1]="D1";
+                break;
+            case "G8":
+                moves[0]="H8";
+                moves[1]="F8";
+                break;
+            default:
+                moves[0]="A8";
+                moves[1]="D8";
+                break;
+        }
+        return moves;
+    }
+    
+    public boolean castled(Piece piece, int fromColumn, int toColumn){
+        return (piece instanceof King && Math.abs(fromColumn - toColumn)==2);
+    }    
 
     public boolean addPiece(int row, int column, Piece piece) {
         getField(row, column).setPiece(piece);
@@ -211,5 +213,10 @@ public class ChessBoard {
 
     public Piece getPiece(int row, int column) {
         return getField(row, column).getPiece();
+    }
+    
+    public Piece getPiece(String coordinates) {
+        int[] coord = Coordinates.toIntArray(coordinates);
+        return getField(coord[0], coord[1]).getPiece();
     }
 }

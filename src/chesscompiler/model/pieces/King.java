@@ -78,7 +78,7 @@ public class King extends Piece {
         ChessBoard newBoard = new ChessBoard(board.getRowsCount(), board.getColumnsCount());
         for (int i = 0; i < newBoard.getRowsCount(); i++) {
             for (int j = 0; j < newBoard.getColumnsCount(); j++) {
-                newBoard.addPiece(i, j, board.getPiece(i, j));
+                newBoard.addPiece(i, j, (Piece) board.getPiece(i, j).clone());
             }
         }
 
@@ -106,16 +106,19 @@ public class King extends Piece {
 
     public List<String> castling(ChessBoard board, String coordinates) {
         List<String> moves = new LinkedList();
-            if (coordinates.equals("E1") && !(board.getPiece(0, 4).hasMoved())){
-                if(!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece(7, 0).hasMoved()) && board.getPiece(7, 0) instanceof Rook)
+        System.out.println(!board.isOccupied("B1") +""+ !board.isOccupied("C1") +""+ !board.isOccupied("D1") +""+ !(board.getPiece("A1").hasMoved()) +""+ (board.getPiece("A1") instanceof Rook));
+               
+            if (coordinates.equals("E1") && !(board.getPiece("E1").hasMoved())){
+                if(!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece("H1").hasMoved()) && board.getPiece("H1") instanceof Rook)
                     moves.add("G1");
-                else if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece(7, 0).hasMoved()) && board.getPiece(7, 0) instanceof Rook)
-                    moves.add("C1");
-            }
-            else if (coordinates.equals("E8") && !(board.getPiece(7, 4).hasMoved())){
-                if(!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece(7, 7).hasMoved()) && board.getPiece(7, 7) instanceof Rook)
+                if(!board.isOccupied("B1") && !board.isOccupied("C1") && !board.isOccupied("D1") && !(board.getPiece("A1").hasMoved()) && board.getPiece("A1") instanceof Rook)
+                 {
+                     moves.add("C1");
+            }}
+            else if (coordinates.equals("E8") && !(board.getPiece("E8").hasMoved())){
+                if(!board.isOccupied("F8") && !board.isOccupied("G8") && !(board.getPiece("H8").hasMoved()) && board.getPiece("H8") instanceof Rook)
                     moves.add("G8");
-                else if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !(board.getPiece(0, 7).hasMoved()) && board.getPiece(0, 7) instanceof Rook)
+                if(!board.isOccupied("B8") && !board.isOccupied("C8") && !board.isOccupied("D8") && !(board.getPiece("A8").hasMoved()) && board.getPiece("A8") instanceof Rook)
                     moves.add("C8");    
             }
         return moves;
