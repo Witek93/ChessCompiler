@@ -47,6 +47,7 @@ public class ChessController {
         this.view.addGameModeAction((ActionEvent e) -> {
             this.whiteMoves = true;
             view.setStatus("Turn of whites");
+            view.resetHighlight();
             model.resetState();
         });
 
