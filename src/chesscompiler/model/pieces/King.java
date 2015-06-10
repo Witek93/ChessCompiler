@@ -106,8 +106,6 @@ public class King extends Piece {
 
     public List<String> castling(ChessBoard board, String coordinates) {
         List<String> moves = new LinkedList();
-        System.out.println(!board.isOccupied("B1") +""+ !board.isOccupied("C1") +""+ !board.isOccupied("D1") +""+ !(board.getPiece("A1").hasMoved()) +""+ (board.getPiece("A1") instanceof Rook));
-               
             if (coordinates.equals("E1") && !(board.getPiece("E1").hasMoved())){
                 if(!board.isOccupied("F1") && !board.isOccupied("G1") && !(board.getPiece("H1").hasMoved()) && board.getPiece("H1") instanceof Rook)
                     moves.add("G1");

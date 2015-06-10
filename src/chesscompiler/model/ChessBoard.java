@@ -2,13 +2,33 @@ package chesscompiler.model;
 
 import chesscompiler.model.pieces.King;
 import chesscompiler.model.pieces.NoPiece;
+import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
 
 public class ChessBoard {
 
     private final Field[][] fields;
+    private boolean enPassant;
 
+    public void setEnPassant(boolean enPassant) {
+        this.enPassant = enPassant;
+    }
+
+    public boolean isEnPassant() {
+        return enPassant;
+    }
+    
+    private final int[] enPassantField = new int[2];
+    
+    public int getEnPassantRow(){
+        return enPassantField[0];
+    }
+    
+    public int getEnPassantColumn(){
+        return enPassantField[1];
+    }
+    
     public ChessBoard(int rowsCount, int columnsCount) {
         this.fields = new Field[rowsCount][columnsCount];
         initializeFields();
@@ -103,8 +123,25 @@ public class ChessBoard {
         
         if (castled(sourcePiece, fromColumn, toColumn))
             move(moveRook(toRow, toColumn)[0], moveRook(toRow, toColumn)[1]);
-    }
         
+        wasEnPassant(sourcePiece, fromRow, fromColumn, toRow, toColumn);
+        
+        if (wasPawnDoubleMoved(sourcePiece, fromRow, toRow)){
+            setEnPassant(true);
+            enPassantField[0]=toRow;
+            enPassantField[1]=toColumn;
+        }
+        else setEnPassant(false);
+    }
+    
+    private void wasEnPassant(Piece piece, int fromRow, int fromColumn, int toRow, int toColumn){
+        if (isEnPassant() && piece instanceof Pawn && Math.abs(toRow-fromRow)==1 &&  Math.abs(toColumn-fromColumn)==1 
+                && enPassantField[0]==fromRow && enPassantField[1]==toColumn){
+            Field source = getField(fromRow, toColumn);
+            source.setPiece(new NoPiece());
+        }
+    }
+    
     public void move(String from, String to) {
         int[] source = Coordinates.toIntArray(from);
         int[] destination = Coordinates.toIntArray(to);
@@ -141,6 +178,10 @@ public class ChessBoard {
         return (piece instanceof King && Math.abs(fromColumn - toColumn)==2);
     }    
 
+    public boolean wasPawnDoubleMoved(Piece piece, int fromRow, int toRow){
+        return (piece instanceof Pawn && Math.abs(fromRow - toRow)==2); 
+    }
+   
     public boolean addPiece(int row, int column, Piece piece) {
         getField(row, column).setPiece(piece);
         return true;
@@ -212,7 +253,9 @@ public class ChessBoard {
     }
 
     public Piece getPiece(int row, int column) {
-        return getField(row, column).getPiece();
+        if (row<getRowsCount()&& column<getColumnsCount())
+            return getField(row, column).getPiece();
+        else return new NoPiece();
     }
     
     public Piece getPiece(String coordinates) {

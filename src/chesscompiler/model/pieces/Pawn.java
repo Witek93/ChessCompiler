@@ -75,15 +75,35 @@ public class Pawn extends Piece {
             moves.add(right);
         }
 
+        moves.addAll(enPassant(coordinates, board));
+        
         while (moves.contains(
                 null)) {
             moves.remove(null);
         }
-
+        
         return moves.toArray(
                 new String[moves.size()]);
     }
 
+    private List<String> enPassant(String coordinates, ChessBoard board){
+        List<String> enPassantMove = new LinkedList<>();
+        int[] coord = Coordinates.toIntArray(coordinates);
+        String move;
+        String enPassantCoordinates = Coordinates.create(board.getEnPassantRow(), board.getEnPassantColumn());
+        if (board.isEnPassant() && board.getEnPassantRow()==coord[0] && Math.abs(board.getEnPassantColumn()-coord[1])==1){
+            if(board.getPiece(coordinates).isBlack() && board.getPiece(enPassantCoordinates).isWhite()){
+                move = Coordinates.create(board.getEnPassantRow()+1, board.getEnPassantColumn());
+                enPassantMove.add(move);
+            } 
+            if(board.getPiece(coordinates).isWhite() && board.getPiece(enPassantCoordinates).isBlack()){
+                move = Coordinates.create(board.getEnPassantRow()-1, board.getEnPassantColumn());
+                enPassantMove.add(move);
+            }
+        }
+        return enPassantMove;
+    }
+    
     private boolean canMoveTwice(ChessBoard board, String frontfront) {
         return !board.isOccupied(frontfront);
     }
