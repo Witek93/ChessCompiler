@@ -18,7 +18,7 @@ public class Main {
         board.addPiece("E8", new King(Piece.Color.BLACK));
         board.addPiece("A8", new Rook(Piece.Color.BLACK));
         board.addPiece("H8", new Rook(Piece.Color.BLACK));
-        board.addPiece("D7", new Knight(Piece.Color.BLACK));
+        board.addPiece("D7", new Pawn(Piece.Color.WHITE));
 
         controller.updateView();
 

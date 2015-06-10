@@ -46,17 +46,16 @@ public class Pawn extends Piece {
         String front;
         if (this.color.equals(Color.WHITE)) {
             front = Coordinates.up(coordinates);
-            if (!board.isOccupied(front)) {
+            if (front!= null && !board.isOccupied(front)) {
                 moves.add(front);
                 String frontfront = Coordinates.up(front);
-                String frontvertical = Coordinates.up(front);
                 if (board.isAtInitialFile(coordinates) && canMoveTwice(board, frontfront)) {
                     moves.add(frontfront);
                 }
             }
         } else {
             front = Coordinates.down(coordinates);
-            if (!board.isOccupied(front)) {
+            if (front != null && !board.isOccupied(front)) {
                 moves.add(front);
                 String frontfront = Coordinates.down(front);
                 if (board.isAtInitialFile(coordinates) && canMoveTwice(board, frontfront)) {

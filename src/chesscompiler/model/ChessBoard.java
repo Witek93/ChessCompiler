@@ -2,6 +2,7 @@ package chesscompiler.model;
 
 import chesscompiler.model.pieces.King;
 import chesscompiler.model.pieces.NoPiece;
+import chesscompiler.model.pieces.Pawn;
 import chesscompiler.model.pieces.Piece;
 import java.awt.Image;
 
@@ -185,6 +186,20 @@ public class ChessBoard {
             return false;
         }
         return true;
+    }
+    
+    public boolean shouldBePromoted(int row, int column) {
+        Piece piece = getPiece(row, column);
+        if(piece instanceof Pawn) {
+            System.out.println("Pawn at row: " + row);
+            if(piece.isBlack() && row == 7) {
+                return true;
+            }
+            if (piece.isWhite() && row == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isBlackPiece(int row, int column) {
