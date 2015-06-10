@@ -5,7 +5,9 @@ import chesscompiler.model.Coordinates;
 import chesscompiler.model.pieces.*;
 import chesscompiler.scanner.BoardScanner;
 import chesscompiler.view.ChessFrame;
+import chesscompiler.view.PromotionFrame;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
@@ -32,6 +34,7 @@ public class ChessController {
         setListeners();
     }
 
+
     public void setListeners() {
         for (int i = 0; i < model.getRowsCount(); i++) {
             for (int j = 0; j < model.getColumnsCount(); j++) {
@@ -47,6 +50,7 @@ public class ChessController {
         this.view.addGameModeAction((ActionEvent e) -> {
             this.whiteMoves = true;
             view.setStatus("Turn of whites");
+            view.resetHighlight();
             model.resetState();
         });
 
@@ -93,6 +97,9 @@ public class ChessController {
             private void processLMBInGameMode() {
                 if (view.isHighlighted(row, column)) {
                     movePieceAndResetHighlight(row, column);
+                    if (model.shouldBePromoted(row, column)) {
+                        processPromote(row, column);
+                    }
                     whiteMoves = !whiteMoves;
                     view.setStatus("Turn of " + (whiteMoves ? "whites" : "blacks"));
                 } else if (whiteMoves) {
@@ -120,6 +127,31 @@ public class ChessController {
                         processMovement(row, column);
                     }
                 }
+            }
+
+            private void processPromote(int row, int column) {
+                PromotionFrame promotionFrame = new PromotionFrame();
+                promotionFrame.setVisible(true);
+                promotionFrame.onQueenClick((ActionEvent e) -> {
+                    model.addPiece(row, column, new Queen(model.getPiece(row, column).getColor()));
+                    updateView();
+                    promotionFrame.dispose();
+                });
+                promotionFrame.onRookClick((ActionEvent e) -> {
+                    model.addPiece(row, column, new Rook(model.getPiece(row, column).getColor()));
+                    updateView();
+                    promotionFrame.dispose();
+                });
+                promotionFrame.onBishopClick((ActionEvent e) -> {
+                    model.addPiece(row, column, new Bishop(model.getPiece(row, column).getColor()));
+                    updateView();
+                    promotionFrame.dispose();
+                });
+                promotionFrame.onKnightClick((ActionEvent e) -> {
+                    model.addPiece(row, column, new Knight(model.getPiece(row, column).getColor()));
+                    updateView();
+                    promotionFrame.dispose();
+                });
             }
 
             private void processMovement(int row, int column) {
