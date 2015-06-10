@@ -35,6 +35,11 @@ public class Pawn extends Piece {
         return img;
     }
 
+    //TODO 
+    public boolean hasMoved(String from, String to){
+        return true;
+    }
+    
     @Override
     public String[] getDefaultMoves(String coordinates, ChessBoard board) {
         List<String> moves = new LinkedList<>();
@@ -82,26 +87,27 @@ public class Pawn extends Piece {
     private boolean canMoveTwice(ChessBoard board, String frontfront) {
         return !board.isOccupied(frontfront);
     }
-    
+    //TODO funkcja z bezposrednio sprawdzajaca czy ruch byl pierwszym ruchem :< i cy zaden inny pionek sie nie ruszal
     public boolean isEnPassantBlack(ChessBoard board, String frontfront) {
             for (int j = 0; j < board.getColumnsCount(); j++) {
                 if (board.areEnemies(Coordinates.create(3, j+1), Coordinates.create(3, j))) {
                     Piece pieceBlack = board.getPiece(3, j+1);
                     Piece pieceWhite = board.getPiece(3, j);
-                    if (((pieceBlack instanceof Pawn) && !pieceBlack.hasMoved()) && (pieceWhite instanceof Pawn) && pieceWhite.hasMoved()){
-                        return true;
-                        
+                    if (((pieceBlack instanceof Pawn) && pieceBlack.hasMoved()) && 
+                       (pieceWhite instanceof Pawn) && pieceWhite.hasMoved(Coordinates.create(1, j), Coordinates.create(3, j))){
+                        return true; 
                     }
                 }
             }
         return false;
     }
+    
     public boolean isEnPassantWhite(ChessBoard board, String frontfront) {
         for (int j = 0; j < board.getColumnsCount(); j++) {
             if (board.areEnemies(Coordinates.create(4, j+1), Coordinates.create(4, j))) {
                 Piece pieceWhite = board.getPiece(4, j+1);
                 Piece pieceBlack = board.getPiece(4, j);
-                if (((pieceWhite instanceof Pawn) && !pieceWhite.hasMoved()) && (pieceBlack instanceof Pawn) && pieceBlack.hasMoved()){
+                if (((pieceWhite instanceof Pawn) && !pieceWhite.hasMoved()) && pieceBlack.hasMoved(Coordinates.create(7, j), Coordinates.create(4, j))){
                     return true;    
                 }
             }
